@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eagle>
+    <data>
+
+        <template id="external_layout_tabulation">
+        <div class="header">
+             <div style="width: 100px;float: left;">
+                <img src='/web/binary/company_logo' style="width:100%"/>
+            </div>
+            <div style="width: 80%;float: left;padding-left:10px">
+                <h4 style="text-transform: uppercase;" t-if="res_company.name"><span t-field="res_company.name"/></h4>
+                <h5 t-if="res_company.street"><span t-field="res_company.street"/><t t-if="res_company.street2"><span t-field="res_company.street2"/> </t></h5>
+                    <h5 t-if="res_company.country_id"><span t-field="res_company.country_id"/></h5>
+            </div>
+        </div>
+
+        <div class="article">
+          <t t-raw="0" />
+        </div>
+
+        <!--<div class="footer o_boxed_footer">-->
+           <!--<div class="footer">-->
+
+            <!--</div>-->
+        <!--</div>-->
+    </template>
+
+    <template id="report_dsblsc_tabulation">
+            <t t-call="web.html_container">
+                <t t-call="education_exam.external_layout_tabulation">
+                    <t t-set="exams" t-value="get_exams(docs)"/>
+                    <t t-set="students" t-value="get_students(docs)"/>
+                    <t t-foreach="students" t-as="student">
+                        <t t-set="results" t-value="get_results(docs)"/>
+
+                        <style>
+                            table, th, td{
+                                     border: 1px solid black;
+                                    vertical-align: middle;
+                                    align:center;
+                                    font-size:16px;
+                                    padding-top:2px;
+                                    padding-right:2px;
+                                    padding-left:2px;
+                                    padding-bottom:2px;
+                                    text-align: center;
+                                    }
+                            .right_top{
+                            float:right;
+                            padding-top:65px;
+                            }
+                            .left_top{
+                            float:left;
+                            padding-top:65px;
+                            }
+                            .right{
+                            float:right;
+                            padding-top:10px;
+                            padding-left:80px;
+                            padding-right:10px;
+                            padding-bottom:10px;
+                            }
+                            .rotated {
+                            writing-mode: tb-rl;
+                            transform: rotate(-90deg);
+                              -webkit-transform: rotate(-90deg);
+                              -moz-transform: rotate(-90deg);
+                              -o-transform: rotate(-90deg);
+                              -ms-transform: rotate(-90deg);
+                            }
+                            .dont_split{
+                               page-break-inside: avoid;
+                                }
+                        </style>
+                        <t t-set="sections" t-value="get_sections(docs)"/>
+                        <t t-foreach="sections" t-as="section"></t>
+                            <t t-set="subjects" t-value="get_subjects(students)"/>
+                            <div class="page" page-breake-inside="avoid">
+                            <div class="oe_structure">
+                                <div class="dont_split">
+                                <div class="row" width="100%">
+
+                                </div>
+                                <div class="row">
+
+                                    <table width="100%">
+                                        <tr>
+                                            <td colspan="3">Id</td>
+                                            <td colspan="3">Roll</td>
+                                            <td colspan="3">Name</td>
+                                            <td colspan="3">exam</td>
+                                            <t t-foreach="subjects" t-as="subject">
+                                                <td>
+                                                    <t t-esc="subject.name"/>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                     <tr>
+                                          <t t-foreach="exams" t-as="exam">
+
+                                              <t t-if="exam_first">
+                                                  <th rowspan="3">Subjects</th>
+
+                                                  <t t-if="results[exam.id][student.id]['result'].show_paper">
+                                                      <th rowspan="3">Papers</th>
+                                                  </t>
+                                                  <th t-att-colspan="results[exam.id][student.id]['result'].result_type_count*2+1" rowspan="2">Full marks</th>
+                                                  <th >
+                                                      <t t-esc="exam.name"/>
+                                                  </th>
+                                              </t>
+                                          </t>
+                                    </tr>
+                                    <tr>
+                                        <t t-foreach="exams" t-as="exam">
+                                            <th t-att-colspan="results[exam.id][student.id]['result'].result_type_count+1">Marks obtained</th>
+                                            <th rowspan="2">Highest marks</th>
+                                            <th rowspan="2">LG</th>
+                                            <th rowspan="2">GP</th>
+                                            <t t-if="fourth_subject==1">
+                                                <th rowspan="2">GPA <br>(without 4th Sub)</br></th>
+                                                <th rowspan="2">GPA <br>(with 4th sub)</br></th>
+                                            </t>
+                                            <t t-else="">
+                                                <th rowspan="2">GPA </th>
+                                            </t>
+                                        </t>
+                                    </tr>
+                                    <t t-foreach="exams" t-as="exam">
+                                        <t t-if="exam_first">
+                                              <!--here I input <tr>-->
+                                            <p>&lt;tr&gt;</p>
+                                            <t t-if="results[exam.id][student.id]['result'].show_tut">
+                                                <td>Tut</td>
+                                                <td>Pass Mark</td>
+                                            </t>
+                                            <t t-if="results[exam.id][student.id]['result'].show_subj">
+                                                <td>Sub</td>
+                                                <td>pass</td>
+                                            </t>
+                                            <t t-if="results[exam.id][student.id]['result'].show_obj">
+                                                <td>Obj</td>
+                                                <td>Pass</td>
+                                            </t>
+                                            <t t-if="results[exam.id][student.id]['result'].show_prac">
+                                                <td>Prac</td>
+                                                <td>pass</td>
+                                            </t>
+                                            <td>Total</td>
+                                        </t>
+                                        <t t-if="results[exam.id][student.id]['result'].show_tut">
+                                            <td>Tut</td>
+                                        </t>
+                                        <t t-if="results[exam.id][student.id]['result'].show_subj">
+                                            <td>Sub</td>
+                                        </t>
+                                        <t t-if="results[exam.id][student.id]['result'].show_obj">
+                                            <td>Obj</td>
+                                        </t>
+                                        <t t-if="results[exam.id][student.id]['result'].show_prac">
+                                            <td>Prac</td>
+                                        </t>
+                                        <td>Total marks</td>
+                                        <t t-if="exam_last">
+                                                <!--here I input </tr>-->
+                                            <p>&lt;/tr&gt;</p>
+                                        </t>
+                                    </t>
+                                    <!--<t t-foreach="subjects['general']" t-as="subject">-->
+                                        <!--<tr>-->
+                                            <!--<t t-foreach="exams" t-as="exam">-->
+                                                <!--<t t-set="result_line" t-value="results[exam.id][student.id][subject.id]"/>-->
+                                                <!--<t t-if="exam_first">-->
+                                                    <!--<td t-att-rowspan="result_line.paper_count">-->
+                                                        <!--<t t-esc="result_line.subject_id.name"/>-->
+                                                    <!--</td>-->
+                                                    <!--<t t-foreach="result_line.paper_ids" t-as="paper_name">-->
+                                                        <!--<t t-if="paper_name_first">-->
+                                                            <!--&lt;!&ndash; no tr for first paper&ndash;&gt;-->
+                                                        <!--</t>-->
+                                                        <!--<t t-else="">-->
+                                                            <!--&lt;!&ndash;statr new row for more papers&ndash;&gt;-->
+                                                            <!--<p>&lt;tr &gt;</p>-->
+                                                        <!--</t>-->
+                                                        <!--<t t-if="results[exam.id][student.id]['result'].show_paper">-->
+                                                            <!--<td>-->
+                                                                <!--<t t-esc="paper_name.paper_id.paper"/>-->
+                                                            <!--</td>-->
+                                                        <!--</t>-->
+                                                        <!--<t t-if="results[exam.id][student.id]['result'].show_tut">-->
+                                                            <!--<td>-->
+                                                                <!--<t t-if="paper_name.pass_rule_id.tut_mark>0">-->
+                                                                    <!--<t t-esc="round(paper_name.pass_rule_id.tut_mark)"/>-->
+                                                                <!--</t>-->
+                                                                <!--<t t-else="">-->
+                                                                <!--</t>-->
+                                                            <!--</td>-->
+        <!--&lt;!&ndash; if tut_mark in subject rule is set-->
+            <!--then show subject unified tut_mark for all the papaers&ndash;&gt;-->
+                                                            <!--<t t-if="result_line.pass_rule_id.tut_pass>0">-->
+                                                                <!--<t t-if="paper_name_first">-->
+                                                                    <!--<td t-att-rowspan="len(result_line.paper_ids)">-->
+                                                                        <!--<t t-esc="round(result_line.pass_rule_id.tut_pass)"/>-->
+                                                                    <!--</td>-->
+                                                                <!--</t>-->
+                                                            <!--</t>-->
+                                                            <!--<t t-else="">-->
+                                                                <!--<td>-->
+                                                                    <!--<t t-if="paper_name.pass_rule_id.tut_pass>0">-->
+                                                                        <!--<t t-esc="round(paper_name.pass_rule_id.tut_pass)"/>-->
+                                                                    <!--</t>-->
+                                                                    <!--<t t-else="">-->
+                                                                    <!--</t>-->
+                                                                <!--</td>-->
+                                                            <!--</t>-->
+        <!--&lt;!&ndash;end&ndash;&gt;-->
+                                                        <!--</t>-->
+                                                        <!--<t t-if="results[exam.id][student.id]['result'].show_subj">-->
+                                                            <!--<td>-->
+                                                                <!--<t t-if="paper_name.pass_rule_id.subj_mark>0">-->
+                                                                    <!--<t t-esc="round(paper_name.pass_rule_id.subj_mark)"/>-->
+                                                                <!--</t>-->
+                                                                <!--<t t-else="">-->
+
+                                                                <!--</t>-->
+                                                            <!--</td>-->
+        <!--&lt;!&ndash; if subj_mark in subject rule is set-->
+            <!--then show subject unified subj_mark for all the papaers&ndash;&gt;-->
+                                                            <!--<t t-if="result_line.pass_rule_id.subj_pass>0">-->
+                                                                <!--<t t-if="paper_name_first">-->
+                                                                    <!--<td t-att-rowspan="len(result_line.paper_ids)">-->
+                                                                        <!--<t t-esc="round(result_line.pass_rule_id.subj_pass)"/>-->
+                                                                    <!--</td>-->
+                                                                <!--</t>-->
+                                                            <!--</t>-->
+                                                            <!--<t t-else="">-->
+                                                                <!--<td>-->
+                                                                    <!--<t t-if="paper_name.pass_rule_id.subj_pass>0">-->
+                                                                        <!--<t t-esc="round(paper_name.pass_rule_id.subj_pass)"/>-->
+                                                                    <!--</t>-->
+                                                                    <!--<t t-else="">-->
+
+                                                                    <!--</t>-->
+                                                                <!--</td>-->
+                                                            <!--</t>-->
+        <!--&lt;!&ndash;end&ndash;&gt;                                                        </t>-->
+                                                        <!--<t t-if="results[exam.id][student.id]['result'].show_obj">-->
+                                                            <!--<td>-->
+                                                                <!--<t t-if="paper_name.pass_rule_id.obj_mark>0">-->
+                                                                    <!--<t t-esc="round(paper_name.pass_rule_id.obj_mark)"/>-->
+                                                                <!--</t>-->
+                                                                <!--<t t-else="">-->
+
+                                                                <!--</t>-->
+                                                            <!--</td>-->
+        <!--&lt;!&ndash; if obj_mark in subject rule is set-->
+            <!--then show subject unified obj_mark for all the papaers&ndash;&gt;-->
+                                                            <!--<t t-if="result_line.pass_rule_id.obj_pass>0">-->
+                                                                <!--<t t-if="paper_name_first">-->
+                                                                    <!--<td t-att-rowspan="len(result_line.paper_ids)">-->
+                                                                        <!--<t t-esc="round(result_line.pass_rule_id.obj_pass)"/>-->
+                                                                    <!--</td>-->
+                                                                <!--</t>-->
+                                                            <!--</t>-->
+                                                            <!--<t t-else="">-->
+                                                                <!--<td>-->
+                                                                    <!--<t t-if="paper_name.pass_rule_id.obj_pass>0">-->
+                                                                        <!--<t t-esc="round(paper_name.pass_rule_id.obj_pass)"/>-->
+                                                                    <!--</t>-->
+                                                                    <!--<t t-else="">-->
+
+                                                                    <!--</t>-->
+                                                                <!--</td>-->
+                                                            <!--</t>-->
+        <!--&lt;!&ndash;end&ndash;&gt;-->
+                                                        <!--</t>-->
+                                                        <!--<t t-if="results[exam.id][student.id]['result'].show_prac">-->
+                                                            <!--<td>-->
+                                                                <!--<t t-if="paper_name.pass_rule_id.prac_mark>0">-->
+                                                                    <!--<t t-esc="round(paper_name.pass_rule_id.prac_mark)"/>-->
+                                                                <!--</t>-->
+                                                                <!--<t t-else="">-->
+
+                                                                <!--</t>-->
+                                                            <!--</td>-->
+        <!--&lt;!&ndash; if prac_mark in subject rule is set-->
+            <!--then show subject unified prac_mark for all the papaers&ndash;&gt;-->
+                                                            <!--<t t-if="result_line.pass_rule_id.prac_pass>0">-->
+                                                                <!--<t t-if="paper_name_first">-->
+                                                                    <!--<td t-att-rowspan="len(result_line.paper_ids)">-->
+                                                                        <!--<t t-esc="round(result_line.pass_rule_id.prac_pass)"/>-->
+                                                                    <!--</td>-->
+                                                                <!--</t>-->
+                                                            <!--</t>-->
+                                                            <!--<t t-else="">-->
+                                                                <!--<td>-->
+                                                                    <!--<t t-if="paper_name.pass_rule_id.prac_pass>0">-->
+                                                                        <!--<t t-esc="round(paper_name.pass_rule_id.prac_pass)"/>-->
+                                                                    <!--</t>-->
+                                                                    <!--<t t-else="">-->
+
+                                                                    <!--</t>-->
+                                                                <!--</td>-->
+                                                            <!--</t>-->
+        <!--&lt;!&ndash;end&ndash;&gt;-->
+                                                        <!--</t>-->
+                                                        <!--<td>-->
+                                                            <!--<t t-esc="round(paper_name.pass_rule_id.paper_marks)"/>-->
+                                                        <!--</td>-->
+                                                        <!--<t t-if="results[exam.id][student.id]['result'].show_tut">-->
+                                                            <!--<td>-->
+                                                                <!--<t t-if="paper_name.pass_rule_id.tut_mark>0">-->
+                                                                    <!--<t t-if="paper_name.tut_pr==True">-->
+                                                                        <!--<t t-esc="round(paper_name.tut_obt)"/>-->
+                                                                    <!--</t>-->
+                                                                    <!--<t t-else="">-->
+                                                                        <!--A-->
+                                                                    <!--</t>-->
+                                                                <!--</t>-->
+                                                            <!--</td>-->
+                                                        <!--</t>-->
+                                                        <!--<t t-if="results[exam.id][student.id]['result'].show_subj">-->
+                                                            <!--<td>-->
+                                                                <!--<t t-if="paper_name.pass_rule_id.subj_mark>0">-->
+                                                                    <!--<t t-if="paper_name.subj_pr==True">-->
+                                                                        <!--<t t-esc="round(paper_name.subj_obt)"/>-->
+                                                                    <!--</t>-->
+                                                                    <!--<t t-else="">-->
+                                                                        <!--A-->
+                                                                    <!--</t>-->
+                                                                <!--</t>-->
+                                                            <!--</td>-->
+                                                        <!--</t>-->
+                                                        <!--<t t-if="results[exam.id][student.id]['result'].show_obj">-->
+                                                            <!--<td>-->
+                                                                <!--<t t-if="paper_name.pass_rule_id.obj_mark>0">-->
+                                                                    <!--<t t-if="paper_name.obj_pr==True">-->
+                                                                        <!--<t t-esc="round(paper_name.obj_obt)"/>-->
+                                                                    <!--</t>-->
+                                                                    <!--<t t-else="">-->
+                                                                        <!--A-->
+                                                                    <!--</t>-->
+                                                                <!--</t>-->
+                                                            <!--</td>-->
+                                                        <!--</t>-->
+                                                        <!--<t t-if="results[exam.id][student.id]['result'].show_prac">-->
+                                                            <!--<td>-->
+                                                                <!--<t t-if="paper_name.pass_rule_id.prac_mark>0">-->
+                                                                    <!--<t t-if="paper_name.prac_pr==True">-->
+                                                                        <!--<t t-esc="round(paper_name.prac_obt)"/>-->
+                                                                    <!--</t>-->
+                                                                    <!--<t t-else="">-->
+                                                                        <!--A-->
+                                                                    <!--</t>-->
+                                                                <!--</t>-->
+                                                            <!--</td>-->
+                                                        <!--</t>-->
+                                                        <!--<t t-if="paper_name_first">-->
+                                                            <!--<td t-att-rowspan="result_line.paper_count">-->
+                                                                <!--<t t-esc="round(result_line.subject_obt)"/>-->
+                                                            <!--</td>-->
+                                                            <!--<td t-att-rowspan="result_line.paper_count">-->
+                                                                <!--<t t-esc="round(result_line.pass_rule_id.subject_highest)"/>-->
+                                                            <!--</td>-->
+                                                            <!--<td t-att-rowspan="result_line.paper_count">-->
+                                                                <!--<t t-esc="result_line.letter_grade"/>-->
+                                                            <!--</td>-->
+                                                            <!--<td t-att-rowspan="result_line.paper_count">-->
+                                                                <!--<t t-esc="result_line.grade_point"/>-->
+                                                            <!--</td>-->
+                                                            <!--<t t-if="subject_first">-->
+                                                                <!--<td t-att-rowspan="results[exam.id][student.id]['result'].general_row_count">-->
+                                                                    <!--<t t-set="gpa" t-value="results[exam.id][student.id]['result'].general_gpa"/>-->
+                                                                    <!--<t t-if="5 > gpa">-->
+                                                                        <!--<t t-esc="round(gpa,2)"/>-->
+                                                                    <!--</t>-->
+                                                                    <!--<t t-else="">-->
+                                                                        <!--5-->
+                                                                    <!--</t>-->
+                                                                    <!--(-->
+                                                                    <!--<t t-esc="results[exam.id][student.id]['result'].general_fail_count"/>-->
+                                                                     <!--F)-->
+                                                                <!--</td>-->
+                                                                <!--&lt;!&ndash;<t t-if="fourth_subject>0">&ndash;&gt;-->
+                                                                    <!--&lt;!&ndash;<td t-att-rowspan="results[exam.id][student.id]['result'].general_row_count">&ndash;&gt;-->
+                                                                        <!--&lt;!&ndash;<t t-set="gpa" t-value="results[exam.id][student.id]['result'].net_gpa"/>&ndash;&gt;-->
+                                                                        <!--&lt;!&ndash;<t t-if="5 > gpa">&ndash;&gt;-->
+                                                                            <!--&lt;!&ndash;<t t-esc="round(gpa,2)"/>&ndash;&gt;-->
+                                                                        <!--&lt;!&ndash;</t>&ndash;&gt;-->
+                                                                        <!--&lt;!&ndash;<t t-else="">&ndash;&gt;-->
+                                                                            <!--&lt;!&ndash;5&ndash;&gt;-->
+                                                                        <!--&lt;!&ndash;</t>&ndash;&gt;-->
+                                                                    <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                                                                <!--&lt;!&ndash;</t>&ndash;&gt;-->
+                                                            <!--</t>-->
+                                                        <!--</t>-->
+                                                        <!--<t t-if="paper_name_last">-->
+                                                            <!--&lt;!&ndash; no /tr for last paper&ndash;&gt;-->
+                                                        <!--</t>-->
+                                                        <!--<t t-else="">-->
+                                                            <!--&lt;!&ndash;ends row for more papers&ndash;&gt;-->
+                                                            <!--<p>&lt;/tr &gt;</p>-->
+                                                        <!--</t>-->
+                                                    <!--</t>-->
+                                                <!--</t>-->
+                                            <!--</t>-->
+                                        <!--</tr>-->
+                                    <!--</t>-->
+
+                                    </table>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data></eagle>

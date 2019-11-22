@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eagle>
+    <data>
+        <template id="external_layout_fee_receipt">
+            <div class="header" > </div>
+            <div class="article">
+              <t t-raw="0" />
+            </div>
+            <div class="footer">
+
+            </div>
+        </template>
+
+        <template id="single_fee_receipt_template">
+            <div  style="width:100%">
+                <div style="width: 15%;float: left;">
+                    <img src='/web/binary/company_logo' style="width:100%"/>
+                </div>
+                <div style="width: 85%;float: left; padding-left:10px">
+                    <h6 style="text-transform: uppercase;  text-align: center;" t-if="res_company.name"><span t-field="res_company.name"/></h6>
+                    <h6 style=" text-align: center;"><t t-if="res_company.street"><span t-field="res_company.street"/></t><t t-if="res_company.street2"><span t-field="res_company.street2"/> </t><t t-if="res_company.country_id"><span t-field="res_company.country_id"/></t></h6>
+                </div>
+            </div>
+            <div >
+                <div name="invoice_address" >
+                    <table width="100%">
+                        <tr><td>ID: <t t-esc="o.student_id.student_id"/> </td>
+                            <td colspan="2">Name: <t t-esc="o.student_id.name"/> </td>
+
+                        </tr>
+                        <tr><td><t t-esc="o.student_history.level.name"/> </td>
+                            <td>Section: <t t-esc="o.student_history.section.name"/> </td>
+                            <td>Roll: <t t-esc="o.student_history.roll_no"/> </td>
+                        </tr>
+                    </table>
+                    <div t-if="o.partner_id.vat" class="mt16"><t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>: <span t-field="o.partner_id.vat"/></div>
+                </div>
+            </div>
+
+            <!--<h6>-->
+                <!--<span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice</span>-->
+                <!--<span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>-->
+                <!--<span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>-->
+                <!--<span t-if="o.type == 'out_refund'">Credit Note</span>-->
+                <!--<span t-if="o.type == 'in_refund'">Vendor Credit Note</span>-->
+                <!--<span t-if="o.type == 'in_invoice'">Vendor Bill</span>-->
+                <!--<span t-field="o.number"/>-->
+            <!--</h6>-->
+            <div >
+                <div  t-if="o.name">
+                    <strong>Description:</strong>
+                    <p t-field="o.name"/>
+                </div>
+                <div  style=" width=80%; text-align:center; font-size:10px;">
+                    <t t-esc="whose_copy"/>
+                </div>
+                <div width="50%">
+                    <img t-att-src="'/report/barcode/Code128/%s' % o.number" style="width:100%;height:40px"/>
+                </div>
+                <table class="table table-condensed" name="invoice_line_table">
+                    <thead>
+                        <tr>
+                            <th t-if="o.number"> Invoice No </th>
+                            <th t-if="o.date_invoice"> Date </th>
+                            <th t-if="o.date_invoice">Due Date</th>
+                        </tr>
+                         <tr>
+                             <td t-if="o.number"><p t-field="o.number"/></td>
+                            <td t-if="o.date_due"> <p t-field="o.date_invoice"/> </td>
+                            <td t-if="o.date_due"> <p t-field="o.date_invoice"/> </td>
+                        </tr>
+                    </thead>
+                </table>
+
+
+                <div  t-if="o.origin">
+                    <strong>Source:</strong>
+                    <p t-field="o.origin"/>
+                </div>
+                <div  t-if="o.partner_id.ref">
+                    <strong>Customer Code:</strong>
+                    <p t-field="o.partner_id.ref"/>
+                </div>
+                <div name="reference"  t-if="o.reference">
+                    <strong>Reference:</strong>
+                    <p t-field="o.reference"/>
+                </div>
+            </div>
+
+            <!-- Is there a discount on at least one line? -->
+            <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
+
+            <table class="table table-condensed" name="invoice_line_table">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th class="hidden">Source Document</th>
+                        <th class="text-right">Qty</th>
+                        <!--<th class="text-right">Rate</th>-->
+                        <th  class="text-right">from</th>
+                        <th class="text-right">Till</th>
+                        <th class="text-right">Amount</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody" style="font-size:12px">
+                    <tr t-foreach="o.invoice_line_ids" t-as="l">
+                        <td><span t-field="l.name"/></td>
+                        <td class="hidden"><span t-field="l.origin"/></td>
+                        <td class="text-right">
+                            <span t-esc="round(l.quantity)"/>
+                            <span t-field="l.uom_id"  groups="product.group_uom"/>
+                        </td>
+                        <!--<td class="text-right">-->
+                            <!--<span t-field="l.price_unit"/>-->
+                        <!--</td>-->
+                        <td  class="text-right">
+                            <t t-if="l.paid_from==''">
+                                <span t-esc="datetime.datetime.strptime(l.paid_upto, '%Y-%m-%d').strftime('%b-%y')"/>
+                            </t>
+                        </td>
+                        <td class="text-right">
+                            <span t-esc="datetime.datetime.strptime(l.paid_upto, '%Y-%m-%d').strftime('%b-%y')"/>
+                        </td>
+                        <td class="text-right" id="subtotal">
+                            <span t-field="l.price_subtotal"
+                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                    <tr t-foreach="range(max(5-len(o.invoice_line_ids),0))" t-as="l">
+                        <td t-translation="off">&amp;nbsp;</td>
+                        <td class="hidden"></td>
+                        <td></td>
+                        <td></td>
+                        <td t-if="display_discount"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div >
+                <div id="total" >
+                    <div >
+                        <table class="table table-condensed" >
+                            <tr class="border-black" style="border-bottom:1px solid #dddddd;">
+                                <td><strong>Total</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_untaxed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <p t-if="o.comment">
+                <span t-field="o.comment"/>
+            </p>
+            <p t-if="o.payment_term_id">
+                <span t-field="o.payment_term_id.note"/>
+            </p>
+            <p t-if="o.fiscal_position_id.note">
+    <span t-field="o.fiscal_position_id.note"/>
+</p>
+            <table width="100%">
+                <tr>
+                    <td colspan="100%">Signatures and Seals</td>
+                </tr>
+                <tr>
+                    <td><br/><br/><br/><br/></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Accountant</td>
+                    <td>Received By</td>
+                    <td>Student</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="font-size:10px; padding-top:10px; text-align:center; border-top:1px solid black">Powered By : Eagle ERP</td>
+                </tr>
+            </table>
+        </template>
+
+
+        <template id="report_invoice_document">
+            <t t-call="education_fee.external_layout_fee_receipt">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+                <div class="page">
+                    <table width="100%">
+                        <tr>
+                            <td style="border-right:1px solid #dddddd; pading-right:15px">
+                                <t t-set="whose_copy" t-value="'Students Copy'"/>
+                                <t t-call="education_fee.single_fee_receipt_template"/>
+                            </td>
+                            <td>-</td><td>-</td>
+                            <td style="border-right:1px solid #dddddd; pading-right:5px">
+                                <t t-set="whose_copy" t-value="'Student to Teacher Copy'"/>
+                                <t t-call="education_fee.single_fee_receipt_template"/>
+                            </td>
+                            <td>-</td><td>-</td>
+                            <td style="border-right:1px solid #dddddd; pading-right:5px">
+                                <t t-set="whose_copy" t-value="'Bank to Accountant Copy'"/>
+                                <t t-call="education_fee.single_fee_receipt_template"/>
+                            </td>
+                            <td>-</td><td>-</td>
+                            <td style="border-right:1px solid #dddddd; pading-right:5px">
+                                <t t-set="whose_copy" t-value="'Bank Copy'"/>
+                                <t t-call="education_fee.single_fee_receipt_template"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </t>
+        </template>
+
+        <template id="report_invoice_document_with_payments" inherit_id="account.report_invoice_document" primary="True">
+            <xpath expr="//div[@id='total']/div/table" position="inside">
+                <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
+                <t t-foreach="payments_vals" t-as="payment_vals">
+                    <tr>
+                        <td>
+                            <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']"/></i>
+                        </td>
+                        <td class="text-right">
+                            <span t-esc="payment_vals['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                </t>
+                <t t-if="len(payments_vals) > 0">
+                    <tr class="border-black">
+                        <td><strong>Amount Due</strong></td>
+                        <td class="text-right">
+                             <span t-field="o.residual" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                </t>
+            </xpath>
+        </template>
+
+        <template id="report_fee_receipt">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="education_fee.report_invoice_document" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+        <template id="report_invoice_with_payments">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="account.report_invoice_document_with_payments" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</eagle>

@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eagle>
+    <data>
+        <record id="legal_landscape_evaluation" model="report.paperformat">
+            <field name="name">Legal Landscape for  evaluation</field>
+            <field name="default" eval="True" />
+            <field name="format">Legal</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">15</field>
+            <field name="dpi">100</field>
+        </record>
+
+
+        <template id="external_layout_evaluation">
+        <div class="header" >
+            <div class="row">
+                <div style="width: 100%;text-align:center;">
+                    <h4 style="text-transform: uppercase;" t-if="res_company.name"><span t-field="res_company.name"/></h4>
+                    <h5 t-if="res_company.street"><span t-field="res_company.street"/><t t-if="res_company.street2"><span t-field="res_company.street2"/> </t></h5>
+                        <h5 t-if="res_company.country_id"><span t-field="res_company.country_id"/></h5>
+                </div>
+            </div>
+        </div>
+            <div class="article">
+          <t t-raw="0" />
+        </div>
+
+        <!--<div class="footer o_boxed_footer">-->
+           <div class="footer">
+               <div class="row">
+                    <br/><br/><br/><br/>
+               </div>
+               <div class="row">
+                   <div class="col-xs-4" style="font-size:16px;">Signature of Class Teacher</div>
+                   <div class="col-xs-4" style="font-size:16px;">Compared By</div>
+                   <div class="col-xs-4" style="font-size:16px;">Signature of The Principal</div>
+               </div>
+               <div class="row" >
+                   <table style="border:none;width:100%;">
+                       <tr>
+                           <td style="text-align: left; padding-left: 300px; font-size:9px;">Powered by Eagle ERP</td><td></td>
+                           <td style="text-align: right; font-size:9px;"><span >Page </span><span class="page" /> of <span class="topage" /></td>
+                       </tr>
+                   </table>
+
+               </div>
+            </div>
+        <!--</div>-->
+    </template>
+
+        <template id="optional_paper_numbers">
+            <t t-if="subject_mark_types[subject]['tut']">
+                <td style='background-color : #C0C0C0;' t-att-rowspan="2">
+                    <t t-esc="half_round_up(paper_line.paperline.tut_obt,0)"/>
+                </td>
+            </t>
+            <t t-if="subject_mark_types[subject]['subj']">
+                <td style='background-color : #C0C0C0;' t-att-rowspan="2">
+                    <t t-esc="half_round_up(paper_line.paperline.subj_obt,0)"/>
+                </td>
+            </t>
+            <t t-if="subject_mark_types[subject]['obj']">
+                <td style='background-color : #C0C0C0;' t-att-rowspan="2">
+                    <t t-esc="half_round_up(paper_line.paperline.obj_obt,0)"/>
+                </td>
+            </t>
+            <t t-if="subject_mark_types[subject]['prac']">
+                <td style='background-color : #C0C0C0;' t-att-rowspan="2">
+                    <t t-esc="half_round_up(paper_line.paperline.prac_obt,0)"/>
+                </td>
+            </t>
+            <!--<td style='background-color : #C0C0C0;'>
+                <t t-esc="half_round_up(paper_line.paperline.paper_obt,0)"/>
+            </td>-->
+        </template>
+
+        <template id="average_optional_paper_numbers">
+            <t t-if="subject_mark_types[subject]['tut']">
+                <td style='background-color : #C0C0C0;'  t-att-rowspan="2">
+                    <t t-esc="paper_line.paperline.tut_obt" />
+                </td>
+            </t>
+            <t t-if="subject_mark_types[subject]['subj']">
+                <td style='background-color : #C0C0C0;'  t-att-rowspan="2">
+                    <t t-esc="paper_line.paperline.subj_obt"/>
+                </td>
+            </t>
+            <t t-if="subject_mark_types[subject]['obj']">
+                <td style='background-color : #C0C0C0;' t-att-rowspan="2">
+                    <t t-esc="paper_line.paperline.obj_obt"/>
+                </td>
+            </t>
+            <t t-if="subject_mark_types[subject]['prac']">
+                <td style='background-color : #C0C0C0;' t-att-rowspan="2">
+                    <t t-esc="paper_line.paperline.prac_obt"/>
+                </td>
+            </t>
+            <!--<td style='background-color : #C0C0C0;'>
+                <t t-esc="paper_line.paperline.paper_obt"/>
+            </td>-->
+        </template>
+
+        <template id="general_paper_numbers">
+            <t t-if="subject_mark_types[subject]['tut']">
+                <td  t-att-rowspan="2">
+                    <t t-esc="half_round_up(paper_line.paperline.tut_obt)"/>
+                </td>
+            </t>
+            <t t-if="subject_mark_types[subject]['subj']">
+                <td  t-att-rowspan="2">
+                    <t t-esc="half_round_up(paper_line.paperline.subj_obt)"/>
+                </td>
+            </t>
+            <t t-if="subject_mark_types[subject]['obj']">
+                <td  t-att-rowspan="2">
+                    <t t-esc="half_round_up(paper_line.paperline.obj_obt)"/>
+                </td>
+            </t>
+            <t t-if="subject_mark_types[subject]['prac']">
+                <td  t-att-rowspan="2">
+                    <t t-esc="half_round_up(paper_line.paperline.prac_obt)"/>
+                </td>
+            </t>
+            <!--<td >
+                <t t-esc="half_round_up(paper_line.paperline.paper_obt)"/>
+            </td>-->
+        </template>
+
+        <template id="paper_total_colum_template">
+
+            <t t-if="paper_first">
+                <td t-att-rowspan="max_paper_count">
+                <t t-esc="half_round_up(paper_line.subjectline.subject_obt)"/>
+                </td>
+
+            </t>
+            <t t-if="paper_index==1">
+                <td t-att-rowspan="max_paper_count">
+                    <t t-esc="paper_line.subjectline.letter_grade"/>
+                </td>
+
+            </t>
+        </template>
+
+        <template id="empty_paper_marks">
+            <td  t-att-rowspan="2">
+                <!--Tut -->
+            </td>
+            <td  t-att-rowspan="2">
+                <!--Subj -->
+            </td>
+            <td  t-att-rowspan="2">
+                <!--obj -->
+            </td>
+            <td  t-att-rowspan="2">
+                <!--Prac -->
+            </td>
+            <!--<td >
+                &lt;!&ndash;Total &ndash;&gt;
+            </td>-->
+        </template>
+
+        <template id="average_general_paper_numbers">
+            <t t-if="subject_mark_types[subject]['tut']">
+                <td  t-att-rowspan="2">
+                    <t t-esc="paper_line.paperline.tut_obt"/>
+                </td>
+            </t>
+            <t t-if="subject_mark_types[subject]['subj']">
+                <td  t-att-rowspan="2">
+                    <t t-esc="paper_line.paperline.subj_obt"/>
+                </td>
+            </t>
+            <t t-if="subject_mark_types[subject]['obj']">
+                <td  t-att-rowspan="2">
+                    <t t-esc="paper_line.paperline.obj_obt"/>
+                </td>
+            </t>
+            <t t-if="subject_mark_types[subject]['prac']">
+                <td  t-att-rowspan="2">
+                    <t t-esc="paper_line.paperline.prac_obt"/>
+                </td>
+            </t>
+            <!--<td >
+                <t t-esc="paper_line.paperline.paper_obt"/>
+            </td>-->
+        </template>
+
+        <template id="paper_body">
+            <t t-if="paper_line.paperline.paper_id in student.optional_subjects">
+                <t t-if='len(exam_line.exam_ids)>1'>
+                    <t t-call="education_exam.average_optional_paper_numbers"/>
+                </t>
+                <t t-else="">
+                    <t t-call="education_exam.optional_paper_numbers"/>
+                </t>
+            </t>
+            <t t-else="">
+                <t t-if='len(exam_line.exam_ids)>1'>
+                    <t t-call="education_exam.average_general_paper_numbers"/>
+                </t>
+                <t t-else="">
+                    <t t-call="education_exam.general_paper_numbers"/>
+                </t>
+            </t>
+        </template>
+        <template id="evaluation_table_heading">
+            <span>
+                &lt;table style=" overflow: visible !important;  width:100%;page-break-inside:avoid !important;" &gt;
+            </span>
+            <tr><td colspan="100%">
+                <h4>
+                    <t t-foreach="result_exam_lines" t-as="exam_line">
+
+                        <t t-if="exam_line_last" >
+                            <span t-field="exam_line.name"/> <span > Examination</span>
+                        </t>
+                        <t t-else="">
+                            <span t-field="exam_line.name"/> <span>,   </span>
+                        </t>
+                    </t>
+                </h4>
+            </td></tr>
+                <tr><td colspan="100%">
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <span t-field="section.class_id.name"/>
+                            </td>
+                            <td>
+                                <span>Section : </span>
+                                <span t-field="section.display"/>
+                            </td>
+                            <td>
+                                <t t-if="section.division_id">
+                                    <span>Group : </span>
+                                    <span t-field="section.division_id.name"/>
+                                </t>
+                                <t t-else="">
+                                    <span> Group: N/A</span>
+                                </t>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                </tr>
+                    <tr>
+                        <th rowspan="3">ID</th>
+                        <th rowspan="3">Roll</th>
+                        <th rowspan="3">Name</th>
+                        <th rowspan="3">Exam</th>
+                        <th rowspan="3">Paper</th>
+                        <!--here  1 for total and one for empty cell after each subject-->
+                        <th t-att-colspan="subject_mark_types['colum'] + len(all_subjects)*2">Subjects</th>
+                        <th t-att-colspan="4" t-att-rowspan="2">Evaluation</th>
+                    </tr>
+                    <tr>
+                        <t t-foreach="all_subjects" t-as="subject">
+                            <th t-att-colspan="subject_mark_types[subject]['colum']+1">
+                                <t t-esc="subject.name"/>
+                            </th>
+                            <th>.</th>
+                        </t>
+                    </tr>
+                    <tr>
+                        <t t-foreach="all_subjects" t-as="subject">
+                            <t t-if="subject_mark_types[subject]['tut']">
+                                <th >Mth</th>
+                            </t>
+                            <t t-if="subject_mark_types[subject]['subj']">
+                                <th >Sub</th>
+                            </t>
+                            <t t-if="subject_mark_types[subject]['obj']">
+                                <th >Obj</th>
+                            </t>
+                            <t t-if="subject_mark_types[subject]['prac']">
+                                <th >Pra</th>
+                            </t>
+                            <th >Total</th>
+                            <th></th>
+                            <t t-if="subject_last">
+                                <th>Total</th>
+                                <th>GPA</th>
+                            </t>
+                        </t>
+                    </tr>
+             </template>
+
+        <template id="evaluation_data_layout">
+            <div class="page">
+                <div class="oe_structure">
+                    <div class="row">
+                        <t t-set="max_student_in_page" t-value="get_record_per_page(docs)"/>
+                        <t t-set="student_in_page" t-value="0"/>
+                                <t t-set="df_results" t-value="get_results(result_exam_lines,section)" />
+                                <t t-set="max_paper_count" t-value="get_max_paper_count(result_exam_lines)"/>
+                                <t t-set="row_for_student" t-value="max_paper_count*len(result_exam_lines)*2"/>
+                                <t t-foreach="students" t-as="student">
+                                    <t t-set="df_student" t-value="df_results[(df_results['studentId'] == student.id)]"/>
+                                    <!--                                    <t t-set="row_for_student" t-value="df_student.shape[0]"/>-->
+                                    <t t-if="student_in_page==0">
+                                       <t t-call="education_exam.evaluation_table_heading"/>
+                                   </t>
+                                    <t t-set="student_in_page" t-value="student_in_page+1"/>
+
+                                    <span>&lt;div style="page-break-inside : avoid !important;"&gt;&lt;tr &gt;</span>
+                                    <td t-att-rowspan="row_for_student" style="page-break-inside : avoid !important;">
+                                        <div style="page-break-before : auto;page-break-after : avoide !important; page-break-inside : avoid !important; width:100%; hight:100%">
+                                            <t t-esc="student.student_id.student_id"/>
+                                        </div>
+                                    </td>
+                                    <td t-att-rowspan="row_for_student">
+                                        <div >
+                                            <t t-esc="student.roll_no"/>
+                                        </div>
+                                    </td>
+                                    <td t-att-rowspan="row_for_student">
+                                        <div >
+                                            <t t-esc="student.student_id.name"/>
+                                        </div>
+                                    </td>
+                                    <t t-foreach="result_exam_lines" t-as="exam_line">
+                                        <td t-att-rowspan="max_paper_count*2">
+                                            <t t-esc="exam_line.name"/>
+                                        </td>
+                                        <t t-set="df_student_exam" t-value="df_student[(df_student['examId']==exam_line.id)]"/>
+                                        <t t-foreach="range(1,max_paper_count+1)" t-as="paper">
+                                            <t t-set="paper_index" t-value="paper-1"/>
+                                            <td t-att-rowspan="2">
+                                               <t t-esc="num2serial(paper)"/>
+                                            </td>
+                                            <t t-foreach="all_subjects" t-as="subject">
+
+                                                <t t-set="df_student_exam_subject" t-value="df_student_exam[(df_student_exam['subjectId']==subject.id)]"/>
+                                                    <t t-if="df_student_exam_subject.shape[0]>paper_index">
+                                                        <t t-set="paper_line" t-value="df_student_exam_subject.iloc[paper_index]"/>
+                                                        <t t-call="education_exam.paper_body"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-call="education_exam.empty_paper_marks"/>
+                                                    </t>
+                                                    <t t-call="education_exam.paper_total_colum_template"/>
+                                                    <td t-att-rowspan="2"><!--This cell kept blank for each Subject--></td>
+                                            <!-- This is for the result at right-->
+                                                <t t-if="subject_last">
+                                                    <td t-att-rowspan="2">
+                                                        <t t-esc="paper_line.resultline.net_obtained"/>
+                                                    </td>
+                                                    <td t-att-rowspan="2">
+                                                        <t t-esc="paper_line.resultline.net_gpa"/>
+                                                    </td>
+                                                    <span>&lt;/tr &gt;&lt;tr &gt;</span>
+                                                </t>
+                                            </t>
+                                            <!-- This is for the secound row for each paper-->
+                                            <t t-foreach="all_subjects" t-as="subject">
+                                                <t t-if="subject_last">
+                                                    <span>&lt;/tr &gt;&lt;tr  &gt;</span>
+                                                </t>
+                                            </t>
+                                        </t>
+                                    </t>
+                                    <span >&lt;/div&gt;</span>
+                                    <t t-if="student_in_page==max_student_in_page">
+                                       <span>&lt;/table&gt;</span>
+                                    <t t-set="student_in_page" t-value="0"/>
+                                    </t>
+                                </t>
+
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="report_exam_evaluation">
+            <t t-call="web.html_container">
+                <t t-set="converted_report" t-value="get_converted_report(docs)"/>
+                <t t-foreach="get_sections(docs)" t-as="section">
+                    <t t-set="result_exam_lines" t-value="get_exam_result_lines(docs)" />
+                    <t t-set="all_subjects" t-value="get_all_subjects(section,result_exam_lines)"/>
+                    <t t-set="students" t-value="get_students(docs,section)"/>
+                    <t t-set="subject_mark_types" t-value="get_subject_mark_types(all_subjects,result_exam_lines)"/>
+                    <t t-set="exam_count" t-value="len(result_exam_lines)"/>
+                    <t t-call="education_exam.external_layout_evaluation">
+                        <style>
+                            thead  { display: table-header-group }
+                            tfoot { display: table-foote-group ;
+                                }
+                            tr {border: 1px solid black;
+                            padding-left:0px;
+                            padding-right:0px;
+                            padding-top:0px;
+                            padding-bottom:0px;
+                            text-align: center;
+                            vertical-align: middle;
+                            }
+                            table, th {
+                            border-collapse:collapse;
+                            border: 1px solid black;
+                            padding-left:0px;
+                            padding-right:0px;
+                            padding-top:0px;
+                            padding-bottom:0px;
+                            text-align: center;
+                            vertical-align: middle;
+                            }
+                            td{
+                            white-space: nowrap;
+                            border: 0.5px solid black;
+                            vertical-align: top;
+                            padding-left:0px;
+                            padding-right:0px;
+                            padding-top:0px;
+                            padding-bottom:0px;
+                            text-align: center;
+                            vertical-align: middle;
+                            }
+
+                            .right_top{
+                            float:right;
+                            padding-top:0px;
+                            padding-right:100px;
+                            }
+                            .left_top{
+                            float:left;
+                            padding-top:0px;
+                            padding-left:100px;
+                            }
+                            .center_top{
+                            float:left;
+                            padding-top:0px;
+                            padding-left:500px;
+                            }
+                        </style>
+                        <t t-call="education_exam.evaluation_data_layout"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</eagle>
+

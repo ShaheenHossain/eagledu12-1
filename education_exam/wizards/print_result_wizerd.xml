@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eagle>
+    <data>
+
+        <record id="education_exam_result_wizard_form" model="ir.ui.view">
+            <field name="name">education.exam.result.wizard.form</field>
+            <field name="model">education.exam.result.wizard</field>
+            <field name="arch" type="xml">
+                <form >
+                    <notebook>
+                        <page string="General Setting">
+                            <group>
+                                <field name="academic_year" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                                <field name="level" options="{'no_quick_create': True, 'no_create_edit' : True}" attrs="{'invisible':[('academic_year','=',False)]}"/>
+                                <field name="exams" options="{'no_quick_create': True, 'no_create_edit' : True}" attrs="{'invisible':[('level','=',False)]}" domain="[('class_id','=',level),('academic_year','=',academic_year)]"/>
+                                <field name="specific_section" options="{'no_quick_create': True, 'no_create_edit' : True}" />
+                                <field name="section" options="{'no_quick_create': True, 'no_create_edit' : True}" attrs="{ 'invisible':[('specific_section','=',False)]}"  domain="[('class_id','=',level),('academic_year_id','=',academic_year)]"/>
+                                <field name="specific_student" options="{'no_quick_create': True, 'no_create_edit' : True}" attrs="{ 'invisible':[('specific_section','=',False)]}"/>
+                                <field name="student" options="{'no_quick_create': True, 'no_create_edit' : True}" attrs="{'invisible': [('specific_student','=',False)]}"  domain="[('class_id','=',section)]"/>
+                                <field name="state"  invisible="True"/>
+                            </group>
+                        </page>
+                        <page string="Advance Settings">
+                            <group col="4">
+                                <group colspan="4" string="Select Report Type">
+                                    <field name="report_type" />
+                                </group>
+                                <group col="2">
+                                    <field name="show_paper"/>
+                                    <field name="show_tut"/>
+                                    <field name="show_subjective"/>
+                                    <field name="show_objective"/>
+                                    <field name="show_prac"/>
+                                    <field name="show_total" attrs="{'invisible': [('report_type', '!=', '2')]}"/>
+                                </group>
+                                <group string="Merit List Settings">
+                                    <field name="show_merit_class"/>
+                                    <field name="show_merit_group"/>
+                                    <field name="show_merit_section"/>
+                                </group>
+
+                                <group col="4">
+                                    <button name="generate_results" type="object" string="Calculate Result" attrs="{'invisible': [('state', '=', 'done')]}"/>
+                                    <button name="get_merit_list" string="Generate meritList" type="object" />
+                                    <button name="del_generated_results" string="Delete Generated Results" type="object" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Evaluation Settings">
+                            <group >
+                                <field name="record_per_page"/>
+                            </group>
+                            <button name="%(action_exam_evaluation)d" string="Evaluation" type="action" />
+                        </page>
+                        <page string="Print" attrs="{'invisible': [('report_type', '!=', '1'),('report_type', '!=', '2')]}">
+                            <group col="4" >
+                                <button name="render_html" string="Marksheet" type="object" />
+                                <button name="%(action_marksheet_converted)d" string="Marksheet (Converted)" type="action" />
+
+                                <button name="%(action_merit_list)d" string="MeritList" type="action" />
+                                <button name="%(action_responsive_marksheet)d" string="Test responsive" type="action" />
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+         <record id="education_exam_result_wizard_tree" model="ir.ui.view">
+            <field name="name">education.exam.result.wizard</field>
+            <field name="model">education.exam.result.wizard</field>
+            <field name="arch" type="xml">
+                <tree >
+                        <field name="academic_year"/>
+                        <field name="exams"/>
+                        <field name="student"/>
+                </tree>
+            </field>
+        </record>
+        <record id="act_education_exam_result_wizard" model="ir.actions.act_window">
+            <field name="name">Education Exam Test Wizard</field>
+            <field name="res_model">education.exam.result.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">new</field>
+            <!--<field name="context">{'search_default_group_class_id': 1, 'search_default_group_division_id':1,-->
+                <!--'search_default_group_exam_id':1}-->
+            <!--</field>-->
+        </record>
+
+        <act_window id="education_exam_result_wizard"
+                    name="test Results"
+                    src_model="academic.transcript"
+                    res_model="education.exam.result.wizard"
+                    view_mode="form"
+                    target="new"
+                    key2="client_action_multi"/>
+
+
+
+        <menuitem id="education_exam_result_wizard_menu" parent="education_exam.examination_result_main_menu"
+                  action="act_education_exam_result_wizard" name="Test" sequence="20" groups="base.group_user"/>
+
+    </data>
+</eagle>

@@ -1,0 +1,3 @@
+"id","from_number/id","name","template_id/id"
+"__export__.default_absent_sms_1_3b16e6b0","__export__.sms_number_1","Default Ful-day Absent SMS","__export__.sms_template_1"
+"__export__.default_absent_sms_2_56872b34","__export__.sms_number_1","Default half day Absent SMS","__export__.sms_template_2"

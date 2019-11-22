@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eagle>
+    <data>
+
+        <record id="exam_subject_pass_rules_tree" model="ir.ui.view">
+            <field name="name">exam_subject_pass_rules_tree</field>
+            <field name="model">exam.subject.pass.rules</field>
+            <field name="arch" type="xml">
+                <tree create="0" >
+                    <field name="sl" />
+                    <field name="name" />
+                    <field name="exam_id" />
+                    <field name="academic_year" readonly="True"/>
+                    <field name="class_id" readonly="True"/>
+                    <!--<field name="division_id" readonly="True"/>-->
+                    <field name="subject_id" />
+                </tree>
+            </field>
+        </record>
+<!--
+    <record id="exam_subject_pass_rules_form" model="ir.ui.view">
+            <field name="name">exam_subject_pass_rules_form</field>
+            <field name="model">exam.subject.pass.rules</field>
+            <field name="view_type">form</field>
+            <field name="arch" type="xml">
+                <form create="0" >
+                    <group col="4">
+                        <field name="name" />
+                        <field name="exam_id" />
+                        <field name="academic_year" readonly="True"/>
+                        <field name="class_id" readonly="True"/>
+                        &lt;!&ndash;<field name="division_id" readonly="True"/>&ndash;&gt;
+                        <field name="subject_id" />
+                        <field name="sl" />
+                    </group>
+                    <group col="3" string="Pass Fail Rules">
+                        <label string="Details" />
+                        <label string="Mark" />
+                        <label string="Min Pass Mark (0 if None)" />
+                        <field  name="tut_mark"/>
+                        <field  name="tut_pass" nolabel="1"/>
+                        <field  name="subj_mark"/>
+                        <field  name="subj_pass" nolabel="1"/>
+                        <field  name="obj_mark"/>
+                        <field  name="obj_pass" nolabel="1"/>
+                        <field  name="prac_mark"/>
+                        <field  name="prac_pass" nolabel="1"/>
+                        <field  name="subject_marks"/>
+                        <field  name="subject_pass_marks" nolabel="1"/>
+                    </group>
+                    <group colspan="4" string="Paper Wise Pass Rules">
+                        <field name="paper_ids" nolabel="1">
+                            <tree>
+                                <field name="sl"/>
+                                <field name="name"/>
+                                <field name="tut_mark"/>
+                                <field name="tut_pass"/>
+                                <field name="subj_mark"/>
+                                <field name="subj_pass"/>
+                                <field name="obj_mark"/>
+                                <field name="obj_pass"/>
+                                <field name="prac_mark"/>
+                                <field name="prac_pass"/>
+                                <field name="paper_marks"/>
+                                <field name="paper_pass_marks"/>
+                            </tree>
+                        </field>
+                    </group>
+                </form>
+            </field>
+        </record>
+-->
+
+<!--
+    <record id="exam_paper_pass_rules_form" model="ir.ui.view">
+            <field name="name">exam_paper_pass_rules_form</field>
+            <field name="model">exam.paper.pass.rules</field>
+            <field name="view_type">form</field>
+            <field name="arch" type="xml">
+                <form create="0" >
+                    <group col="4">
+                        <field name="name" />
+                        <field name="subject_rule_id" />
+                        <field name="paper_id" readonly="True"/>
+                        <field name="sl"/>
+                    </group>
+                    <group colspan="4">
+                        <group col="3">
+                            <label string="Mark Type"/>
+                            <label string="Total Mark"/>
+                            <label string="Pass Mark"/>
+                            <field name="tut_mark"/>
+                            <field name="tut_pass" nolabel="1"/>
+                            <field name="subj_mark"/>
+                            <field name="subj_pass" nolabel="1"/>
+                            <field name="obj_mark"/>
+                            <field name="obj_pass" nolabel="1"/>
+                            <field name="prac_mark"/>
+                            <field name="prac_pass" nolabel="1"/>
+                            <field name="paper_marks"/>
+                            <field name="paper_pass_marks" nolabel="1"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+-->
+
+
+        <record id="exam_paper_pass_rules_tree" model="ir.ui.view">
+            <field name="name">exam_paper_pass_rules_tree</field>
+            <field name="model">exam.paper.pass.rules</field>
+            <field name="arch" type="xml">
+                <tree create="0" >
+                    <field name="sl"/>
+                    <field name="paper_id"/>
+                    <field name="subject_id"/>
+                    <field name="tut_mark"/>
+                    <field name="tut_pass"/>
+                    <field name="subj_mark"/>
+                    <field name="subj_pass"/>
+                    <field name="obj_mark"/>
+                    <field name="obj_pass"/>
+                    <field name="prac_mark"/>
+                    <field name="prac_pass"/>
+                    <field name="paper_marks"/>
+                    <field name="paper_pass_marks"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_exam_subject_pass_rules" model="ir.actions.act_window">
+            <field name="name">Subject wise Pass-Fail Rules</field>
+            <field name="res_model">exam.subject.pass.rules</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <!--<field name="target">current</field>-->
+            <!--<field name="context">{'search_default_group_class_id': 1, 'search_default_group_division_id':1,-->
+                <!--'search_default_group_exam_id':1}-->
+            <!--</field>-->
+        </record>
+        <record id="act_exam_paper_pass_rules" model="ir.actions.act_window">
+            <field name="name">Paper wise Pass-Fail Rules</field>
+            <field name="res_model">exam.paper.pass.rules</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <!--<field name="target">current</field>-->
+            <!--<field name="context">{'search_default_group_class_id': 1, 'search_default_group_division_id':1,-->
+                <!--'search_default_group_exam_id':1}-->
+            <!--</field>-->
+        </record>
+
+
+        <menuitem id="exam_pass_rule_menu" parent="education_exam.examination_result_main_menu"
+                  action="" name="Exam Pass Rules" sequence="20"/>
+        <menuitem id="exam_subject_pass_rule_menu" parent="education_exam.exam_pass_rule_menu"
+                  action="act_exam_subject_pass_rules" name="Subject Rules" sequence="22"/>
+        <menuitem id="exam_paper_pass_rule_menu" parent="education_exam.exam_pass_rule_menu"
+                  action="act_exam_paper_pass_rules" name="Paper Rules" sequence="23"/>
+
+    </data>
+</eagle>

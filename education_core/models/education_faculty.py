@@ -35,7 +35,7 @@ class EducationFaculty(models.Model):
         """Creating the employee for the faculty"""
         for rec in self:
             values = {
-                'name': rec.name + rec.last_name,
+                'name': rec.name,
                 'gender': rec.gender,
                 'birthday': rec.date_of_birth,
                 'image': rec.image,
@@ -56,7 +56,7 @@ class EducationFaculty(models.Model):
 
     name = fields.Char(string='Name', required=True, help="Enter the first name")
     faculty_id = fields.Char(string="ID", readonly=True)
-    last_name = fields.Char(string='Last Name', help="Enter the last name")
+    # last_name = fields.Char(string='Last Name', help="Enter the last name")
     image = fields.Binary(string="Image")
     email = fields.Char(string="Email", help="Enter the Email for contact purpose")
     phone = fields.Char(string="Phone", help="Enter the Phone for contact purpose")

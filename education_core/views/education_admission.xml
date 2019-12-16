@@ -14,6 +14,7 @@
             </tree>
         </field>
     </record>
+
     <record id="view_education_admission_form" model="ir.ui.view">
         <field name="name">education.admission.form</field>
         <field name="model">education.admission.register</field>
@@ -29,6 +30,7 @@
             </form>
         </field>
     </record>
+
     <record id="student_admission_search" model="ir.ui.view">
             <field name="name">Admission Search</field>
             <field name="model">education.admission.register</field>
@@ -51,7 +53,7 @@
         <field name="view_mode">tree,form</field>
     </record>
 
- <record id="view_education_application_tree" model="ir.ui.view">
+    <record id="view_education_application_tree" model="ir.ui.view">
         <field name="name">education.application.tree</field>
         <field name="model">education.application</field>
         <field name="arch" type="xml">
@@ -95,7 +97,9 @@
                  <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button class="oe_stat_button" name="document_view" type="object" icon="fa-list-ol">
+<!--
                             <field string="Documents" name="document_count" widget="statinfo"/>
+-->
                         </button>
 
                         <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
@@ -113,7 +117,7 @@
                                     <td style="padding-right:10px;"><field name="name" placeholder="Name" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-right:10px;"><field name="name_b" placeholder="নাম (বাংলায়)" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
+                                    <td style="padding-right:10px;"><field name="name_b" placeholder="নাম (বাংলায়)" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
                                 </tr>
                             </table>
                         </h4>
@@ -125,9 +129,9 @@
                      <div  attrs="{'invisible':[('already_student','=',True)]}">
                     <separator/>
                     <group string="Admission Details">
-                            <field name="student_category" required="1" placeholder="Internal or External"/>
-                            <field name="register_id" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                            <field name="academic_year_id" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="student_category" placeholder="Internal or External"/>
+                            <field name="register_id" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="academic_year_id" attrs="{'readonly': [('state', '=', 'done')]}"/>
                             <field name="application_date" attrs="{'readonly': [('state', '=', 'done')]}"/>
                             <field name="medium" attrs="{'readonly': [('state', '=', 'done')]}"/>
                             <field name="company_id" groups="base.group_multi_company" attrs="{'readonly': [('state', '=', 'done')]}"/>
@@ -180,7 +184,7 @@
                          <!--<page string="Address">-->
                              <!--<separator string="Present Address"/>-->
                              <div class="o_address_format" string="Present Address">
-                                <field name="street" required="1" placeholder="House No / Village..." class="o_address_street" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                <field name="street" placeholder="House No / Village..." class="o_address_street" attrs="{'readonly': [('state', '=', 'done')]}"/>
                                 <field name="street2" placeholder="Road/ Post Office..." class="o_address_street" attrs="{'readonly': [('state', '=', 'done')]}"/>
                                 <field name="city" placeholder="Area/Thana" class="o_address_city" attrs="{'readonly': [('state', '=', 'done')]}"/>
                                 <field name="state_id" class="o_address_state" placeholder="City/Town/District" options='{"no_open": True}' attrs="{'readonly': [('state', '=', 'done')]}" domain="[('country_id','=',country_id)]"/>
@@ -249,44 +253,34 @@
         </field>
     </record>
 
-    <record id="view_education_application_pivot" model="ir.ui.view">
-        <field name="name">education.application.pivot</field>
-        <field name="model">education.application</field>
-        <field name="arch" type="xml">
-            <pivot string="Application">
-                <!--<field name="admission_class" type="row"/>-->
-                <field name="application_date" interval="month" type="col"/>
-            </pivot>
-        </field>
-    </record>
-
-<!--
-    <record id="application_search" model="ir.ui.view">
+    <record id="application_search_view" model="ir.ui.view">
         <field name="name">Student Application</field>
         <field name="model">education.application</field>
         <field name="arch" type="xml">
             <search string="Search Application">
+                <!--<field name="admission_class"/>-->
                 <field name="application_no"/>
+<!--
                 <field name="medium"/>
                 <field name="gender"/>
                 <field name="religion_id"/>
+-->
                 <filter string="New Application" name="new_application" domain="[('state','!=','done')]"/>
                 <filter string="Draft" name="draft_filter" domain="[('state','=','draft')]"/>
                 <filter string="Done" name="active" domain="[('state','=','done')]"/>
                 <filter string="Rejected" name="rejected" domain="[('state','=','reject')]"/>
                 <group expand='0' string='Group by...'>
-                    &lt;!&ndash;<filter string='Admission To' icon="fa-user" domain="[]" context="{'group_by' : 'admission_class'}"/>&ndash;&gt;
-                    <filter string='Academic Year' icon="fa-user" domain="[]" context="{'group_by' : 'academic_year_id'}"/>
+                    <!--<filter string='Admission To' icon="fa-user" domain="[]" context="{'group_by' : 'admission_class'}"/>-->
+<!--                <filter string='Academic Year' icon="fa-user" domain="[]" context="{'group_by' : 'academic_year_id'}"/>
                     <filter string='Gender' icon="fa-genderless" domain="[]" context="{'group_by' : 'gender'}"/>
                     <filter string='Medium' icon="fa-medium" domain="[]" context="{'group_by' : 'medium'}"/>
                     <filter string='Religion' icon="fa-pencil-square-o" domain="[]" context="{'group_by' : 'religion_id'}"/>
                     <filter string='Register' name="group_register" icon="fa-pencil-square-o" domain="[]" context="{'group_by' : 'register_id'}"/>
+-->
                </group>
            </search>
         </field>
     </record>
--->
-
 
     <record id="action_student_application" model="ir.actions.act_window">
         <field name="name">Student Application</field>
@@ -294,17 +288,14 @@
         <field name="type">ir.actions.act_window</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form,graph,pivot</field>
-<!--
-        <field name="search_view_id" ref="application_search"/>
--->
-        <field name="context">{'search_default_new_application': 1,'search_default_group_register':1}</field>
+        <field name="search_view_id" ref="application_search_view"/>
+        <field name="context">{'search_default_new_application': 1}</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 Create the your first student application here.
             </p>
         </field>
     </record>
-
 
     <menuitem id="menu_education_admission" name="Admission" parent="menu_education_root" sequence="5"/>
     <menuitem id="menu_education_application" name="Application"

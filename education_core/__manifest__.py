@@ -17,7 +17,7 @@
         'data/education.class.section.csv',
         'data/education.division.csv',
         'data/education_core.xml',
-        'data/education.faculty.csv',
+        #'data/education.faculty.csv',
         'views/education_main_menu.xml',
         'views/education_res_partner.xml',
         'views/education_application_reject.xml',

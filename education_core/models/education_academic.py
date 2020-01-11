@@ -25,27 +25,27 @@ class EducationAcademic(models.Model):
     ay_description = fields.Text(string='Description', help="Description about the academic year")
     active = fields.Boolean('Active', default=True,
                             help="If unchecked, it will allow you to hide the Academic Year without removing it.")
-    @api.onchange('ay_end_date')
-    def generate_academic_months(self):
-        month_list=self.env['education.month'].search([('id','>',0)],order='id')
-        if self.ay_end_date:
-            last_month_generated=self.env['education.academic.month'].search([('id','>','0')], order='end_date DESC',limit=1)
-            if len(last_month_generated)>0:
-                gen_year=last_month_generated.years
-                gen_month=last_month_generated.months.id
-            else:
-                gen_year=2018
-            for y in range(gen_year , datetime.strptime(self.ay_end_date,"%Y-%m-%d").year+1):
-                for m in month_list:
-                    data={'years':y,
-                          'months':m.id,
-                          'end_date': date(y, m.id, monthrange(y, m.id)[1]),
-                            'start_date': date(y, m.id, 1),
-                            'month_code':m.code + " " + str(y)
-
-                    }
-                    if len(self.env['education.academic.month'].search([('years', '=', y), ('months', '=', m.id)])) == 0:
-                        new_month=self.env['education.academic.month'].create(data)
+    # @api.onchange('ay_end_date')
+    # def generate_academic_months(self):
+    #     month_list=self.env['education.month'].search([('id','>',0)],order='id')
+    #     if self.ay_end_date:
+    #         last_month_generated=self.env['education.academic.month'].search([('id','>','0')], order='end_date DESC',limit=1)
+    #         if len(last_month_generated)>0:
+    #             gen_year=last_month_generated.years
+    #             gen_month=last_month_generated.months.id
+    #         else:
+    #             gen_year=2018
+    #         for y in range(gen_year , datetime.strptime(self.ay_end_date,"%Y-%m-%d").year+1):
+    #             for m in month_list:
+    #                 data={'years':y,
+    #                       'months':m.id,
+    #                       'end_date': date(y, m.id, monthrange(y, m.id)[1]),
+    #                         'start_date': date(y, m.id, 1),
+    #                         'month_code':m.code + " " + str(y)
+    #
+    #                 }
+    #                 if len(self.env['education.academic.month'].search([('years', '=', y), ('months', '=', m.id)])) == 0:
+    #                     new_month=self.env['education.academic.month'].create(data)
 
     @api.model
     def create(self, vals):
@@ -74,26 +74,26 @@ class EducationAcademic(models.Model):
             if rec.ay_start_date >= rec.ay_end_date:
                 raise ValidationError(_('Start date must be Anterior to End date'))
 
-class EducationAcademicMonth(models.Model):
-    _name = 'education.academic.month'
-    _description = 'Academic month'
-    _rec_name = 'month_code'
-    name=fields.Char("Month")
-    years=fields.Integer('Year')
-    months = fields.Many2one('education.month',string='Name', required=True, help='Name of the Month')
-    month_code=fields.Char('Month')
-    start_date = fields.Date(string='Start date')
-    end_date = fields.Date(string='End date')
-    active = fields.Boolean('Active', default=True,
-                            help="If unchecked, it will allow you to hide the Academic Year without removing it.")
+# class EducationAcademicMonth(models.Model):
+#     _name = 'education.academic.month'
+#     _description = 'Academic month'
+#     _rec_name = 'month_code'
+#     name=fields.Char("Month")
+#     years=fields.Integer('Year')
+#     months = fields.Many2one('education.month',string='Name', required=True, help='Name of the Month')
+#     month_code=fields.Char('Month')
+#     start_date = fields.Date(string='Start date')
+#     end_date = fields.Date(string='End date')
+#     active = fields.Boolean('Active', default=True,
+#                             help="If unchecked, it will allow you to hide the Academic Year without removing it.")
 
 
-    @api.depends('months')
-    def calculate_details(self):
-        for rec in self:
-            rec.end_date=date(rec.years,rec.months.id,monthrange(rec.years,rec.months.id)[1])
-            rec.start_date=date(rec.years,rec.months.id,1)
-            rec.month_code=rec.months.code +" "+ str(rec.years)
+    # @api.depends('months')
+    # def calculate_details(self):
+    #     for rec in self:
+    #         rec.end_date=date(rec.years,rec.months.id,monthrange(rec.years,rec.months.id)[1])
+    #         rec.start_date=date(rec.years,rec.months.id,1)
+    #         rec.month_code=rec.months.code +" "+ str(rec.years)
 
 
 class MonthNames(models.Model):

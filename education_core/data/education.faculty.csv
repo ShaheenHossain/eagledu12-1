@@ -1,8 +1,8 @@
-id,name,last_name,phone,mobile,email,degree/id,gender
-__export__.education_faculty_1_60e07e93,Mohammod Fazar, Ali,,+8801819404601,mfazarali1961@gmail.com,,Male
-__export__.education_faculty_65_42964889,Mohammod Kamrul Islam,Rofiq,,,,,Male
-__export__.education_faculty_66_43796f89,Md. Zohirul Hoq,Bhuiyan,,,,,Male
-__export__.education_faculty_67_0c3861f2,Mohammod Shofiqul, Islam,,,,,Male
+id,name,phone,mobile,email,degree/id,gender
+__export__.education_faculty_1_60e07e93,Mohammod Fazar,,+8801819404601,mfazarali1961@gmail.com,,Male
+__export__.education_faculty_65_42964889,Mohammod Kamrul Islam,,,,,,Male
+__export__.education_faculty_66_43796f89,Md. Zohirul Hoq,,,,,Male
+__export__.education_faculty_67_0c3861f2,Mohammod Shofiqul,,,,,Male
 __export__.education_faculty_68_3c2cfc4e,Kaniz,Fatema,,,,,Female
 __export__.education_faculty_69_a7f2f11a,Sultana Helena,Khanom,,,,,Female
 __export__.education_faculty_70_26edad1f,Nill Komol,Sutrodhor,,,,,Male

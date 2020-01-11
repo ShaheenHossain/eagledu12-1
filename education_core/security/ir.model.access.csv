@@ -29,6 +29,7 @@ access_education_rooms,access.education.rooms,model_education_rooms,,1,1,1,1
 access_education_class_section,access.education.class_section,model_education_class_section,,1,1,1,1
 access_education_import_previous_student,access.education.import_previous_student,model_education_import_previous_student,,1,1,1,1
 access_education_class_division,access.education.class_division,model_education_class_division,,1,1,1,1
+access_education_division,access.education.division,model_education_division,,1,1,1,1
 access_education_class_history,access.education.class_history,model_education_class_history,,1,1,1,1
 access_education_syllabus,access.education.syllabus,model_education_syllabus,,1,1,1,1
 access_education_student,access.education.student,model_education_student,,1,1,1,1

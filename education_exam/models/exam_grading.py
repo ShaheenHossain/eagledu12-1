@@ -6,6 +6,7 @@ from eagle import models, fields, api
 
 class resultGradingSystem(models.Model):
     _name = 'education.result.grading'
+    _description=' result grading'
     _rec_name = 'result'
 
     min_per = fields.Integer('Minimum Percentage', required=True)

@@ -4,6 +4,7 @@ from eagle import models, fields, api
 
 class EducationExamResults(models.Model):
     _name = 'education.exam.results'
+    _description='education exam results'
 
     name = fields.Char(string='Name')
     exam_id = fields.Many2one('education.exam', string='Exam')
@@ -117,6 +118,7 @@ class EducationExamResults(models.Model):
 
 class ResultsSubjectLine(models.Model):
     _name = 'results.subject.line'
+    _description='Results subject line'
 
     tut_full = fields.Integer(string='Tutorial Full')
     subj_full = fields.Integer(string='Subjective Full')
@@ -151,6 +153,7 @@ class ResultsSubjectLine(models.Model):
 
 class exam_result_summery(models.Model):
     _name = 'education.exam.student.summary'
+    _description=' exam student summary'
     exam_id =fields.Many2one('education.exam','Exam')
     student_id=fields.Many2one('education.student',string='Student')
     total_mark=fields.Integer('Total')

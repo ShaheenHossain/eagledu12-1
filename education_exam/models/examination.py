@@ -7,6 +7,7 @@ from eagle.exceptions import UserError, ValidationError
 
 class EducationExam(models.Model):
     _name = 'education.exam'
+    _description=' education exam'
 
     name = fields.Char(string='Name', default='New')
     _rec_name = "exam_type"
@@ -155,6 +156,7 @@ class EducationExam(models.Model):
 
 class SubjectLine(models.Model):
     _name = 'education.subject.line'
+    _description=' subject line'
     _rec_name = 'subject_id'
     subject_id = fields.Many2one('education.syllabus', string='Subject', required=True)
     display=fields.Char(related='subject_id.name')
@@ -169,6 +171,7 @@ class SubjectLine(models.Model):
 
 class EducationExamType(models.Model):
     _name = 'education.exam.type'
+    _description=' exam type'
 
     name = fields.Char(string='Name', required=True)
     school_class_division_wise = fields.Selection([('school', 'School'), ('class', 'Class'), ('division', 'Division'), ('final', 'Final Exam (Exam that promotes students to the next class)')],
@@ -178,6 +181,7 @@ class EducationExamType(models.Model):
 
 class examlist(models.AbstractModel):
     _name='exam.list'
+    _description='exam list'
     name=fields.Char("exam List")
     batch=fields.Many2one('education.academic.year',"batch")
     class_id= fields.Many2one('education.class',"Class")

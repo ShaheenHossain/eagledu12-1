@@ -189,6 +189,7 @@
             </field>
         </record>
 
+<!--
         <record id="receipt_form" model="ir.ui.view">
             <field name="name">account.invoice.form</field>
             <field name="model">account.invoice</field>
@@ -341,7 +342,7 @@
                                     <field name="quantity"/>
                                     <field name="price_unit"/>
                                     <field name="discount"/>
-                                    <!--<field name="invoice_line_tax_ids"/>-->
+                                    &lt;!&ndash;<field name="invoice_line_tax_ids"/>&ndash;&gt;
                                     <field name="price_subtotal"/>
                                 </tree>
                             </field>
@@ -379,7 +380,7 @@
                             <field name="tax_line_ids">
                                 <tree editable="bottom" string="Taxes" create="0">
                                     <field name="name"/>
-                                    <!--Need invisible fields for on_change to create all necessary info -->
+                                    &lt;!&ndash;Need invisible fields for on_change to create all necessary info &ndash;&gt;
                                     <field name="tax_id" invisible="1"/>
                                     <field name="account_analytic_id" invisible="1"/>
                                     <field name="sequence" invisible="1"/>
@@ -402,6 +403,7 @@
                 </form>
             </field>
         </record>
+-->
 
         <!-- Custom reports (aka filters) -->
         <!--<record id="filter_invoice_salespersons" model="ir.filters">-->
@@ -411,6 +413,7 @@
             <!--<field name="context">{'group_by': ['date_invoice:month', 'user_id']}</field>-->
         <!--</record>-->
 
+<!--
         <record id="view_fee_receipts_filter" model="ir.ui.view">
             <field name="name">account.invoice.select</field>
             <field name="model">account.invoice</field>
@@ -452,8 +455,10 @@
                </search>
             </field>
         </record>
+-->
 
         <!-- TODO: remove in master -->
+<!--
         <record id="view_account_invoice_filter_inherit_invoices" model="ir.ui.view">
             <field name="name">account.invoice.select.invoices</field>
             <field name="model">account.invoice</field>
@@ -463,8 +468,10 @@
                 <data/>
             </field>
         </record>
+-->
 
         <!-- TODO: remove in master -->
+<!--
         <record id="view_account_invoice_filter_inherit_credit_notes" model="ir.ui.view">
             <field name="name">account.invoice.select.credit.notes</field>
             <field name="model">account.invoice</field>
@@ -474,8 +481,10 @@
                 <data/>
             </field>
         </record>
+-->
 
 
+<!--
         <record id="action_receipt_tree" model="ir.actions.act_window">
             <field name="name">Receipts</field>
             <field name="res_model">account.invoice</field>
@@ -485,9 +494,11 @@
             <field name="context">{'type':'out_invoice'}</field>
             <field name="search_view_id" ref="view_fee_receipts_filter"/>
         </record>
+-->
 
 
 
+<!--
         <record id="action_receipt_refund_out_tree" model="ir.actions.act_window">
             <field name="name">Receipts</field>
             <field name="res_model">account.invoice</field>
@@ -498,22 +509,28 @@
             <field name="context">{'default_type':'out_invoice', 'type':'out_invoice', 'journal_type': 'sale'}</field>
             <field name="search_view_id" ref="view_fee_receipts_filter"/>
         </record>
+-->
 
 
+<!--
         <record id="action_receipt_refund_out_tree_tree" model="ir.actions.act_window.view">
             <field eval="1" name="sequence"/>
             <field name="view_mode">tree</field>
             <field name="view_id" ref="receipt_tree"/>
             <field name="act_window_id" ref="action_receipt_refund_out_tree"/>
         </record>
+-->
 
+<!--
         <record id="action_receipt_refund_out_tree_form" model="ir.actions.act_window.view">
             <field eval="2" name="sequence"/>
             <field name="view_mode">form</field>
             <field name="view_id" ref="receipt_form"/>
             <field name="act_window_id" ref="action_receipt_refund_out_tree"/>
         </record>
+-->
 
+<!--
         <record id="action_receipt_tree_pending_invoice" model="ir.actions.act_window">
             <field name="name">Pending Fees</field>
             <field name="res_model">account.invoice</field>
@@ -523,21 +540,27 @@
             <field name="context">{'type':'out_invoice'}</field>
             <field name="domain">[('state','=','draft')]</field>
         </record>
+-->
 
+<!--
         <record id="action_receipt_tree_view1" model="ir.actions.act_window.view">
             <field eval="1" name="sequence"/>
             <field name="view_mode">tree</field>
             <field name="act_window_id" ref="action_receipt_tree"/>
         </record>
+-->
 
+<!--
         <record id="action_receipt_tree_view2" model="ir.actions.act_window.view">
             <field eval="2" name="sequence"/>
             <field name="view_mode">form</field>
             <field name="view_id" ref="receipt_form"/>
             <field name="act_window_id" ref="action_receipt_tree"/>
         </record>
+-->
 
         <!-- Education-->
+<!--
         <record id="action_fee_tree1" model="ir.actions.act_window">
             <field name="name">Fee Receipts</field>
             <field name="res_model">account.invoice</field>
@@ -561,22 +584,28 @@
               </p>
             </field>
         </record>
+-->
 
 
+<!--
         <record id="action_fee_tree1_view1" model="ir.actions.act_window.view">
             <field eval="1" name="sequence"/>
             <field name="view_mode">tree</field>
             <field name="view_id" ref="receipt_tree"/>
             <field name="act_window_id" ref="action_fee_tree1"/>
         </record>
+-->
 
+<!--
         <record id="action_fee_tree1_view2" model="ir.actions.act_window.view">
             <field eval="2" name="sequence"/>
             <field name="view_mode">form</field>
             <field name="view_id" ref="receipt_form"/>
             <field name="act_window_id" ref="action_fee_tree1"/>
         </record>
+-->
 
+<!--
         <record id="action_receipt_out_refund" model="ir.actions.act_window">
             <field name="name">Student Credit Notes</field>
             <field name="res_model">account.invoice</field>
@@ -595,20 +624,25 @@
               </p>
             </field>
         </record>
+-->
 
+<!--
         <record id="action_receipt_out_refund_tree" model="ir.actions.act_window.view">
             <field eval="1" name="sequence"/>
             <field name="view_mode">tree</field>
             <field name="view_id" ref="receipt_tree"/>
             <field name="act_window_id" ref="action_receipt_out_refund"/>
         </record>
+-->
 
+<!--
         <record id="action_receipt_out_refund_form" model="ir.actions.act_window.view">
             <field eval="2" name="sequence"/>
             <field name="view_mode">form</field>
             <field name="view_id" ref="receipt_form"/>
             <field name="act_window_id" ref="action_receipt_out_refund"/>
         </record>
+-->
 
         <act_window
            id="account.act_account_journal_2_account_invoice_opened"
@@ -621,14 +655,17 @@
         <menuitem id="menu_student_fee_receipt" name="Students Fee"
                   parent="menu_education_fee_root"
                   sequence="2"/>
+
+<!--
         <menuitem action="action_fee_tree1"
                   id="menu_action_fee_receipt"
-                  parent="menu_student_fee_receipt"
-                  sequence="1" />
-        <menuitem action="action_receipt_out_refund"
+                  parent="menu_student_fee_receipt"/>
+-->
+
+<!--        <menuitem action="action_receipt_out_refund"
           id="menu_action_receipt_out_refund"
           parent="menu_student_fee_receipt"
-          sequence="2"/>
+          sequence="2"/>-->
 
 
     </data>

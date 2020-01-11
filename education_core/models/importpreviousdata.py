@@ -6,6 +6,7 @@ from datetime import date,datetime
 
 class importAllStudent(models.Model):
     _name='education.import.previous.student'
+    _description='import previous student'
     name=fields.Char('Name')
 
     # @api.model

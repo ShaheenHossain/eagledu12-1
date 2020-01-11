@@ -7,6 +7,7 @@ from calendar import monthrange
 
 class AcademyRoomNo(models.Model):
     _name='education.rooms'
+    _description=' the rooms details of class'
     name=fields.Char('Room Name')
     code=fields.Integer('Room No')
     capacity=fields.Integer('Capacity')
@@ -97,5 +98,6 @@ class EducationAcademicMonth(models.Model):
 
 class MonthNames(models.Model):
     _name='education.month'
+    _description='Education month'
     name=fields.Char("Month")
     code=fields.Char('Code')

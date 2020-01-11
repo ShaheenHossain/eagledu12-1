@@ -7,6 +7,7 @@ from eagle import fields, models,api
 
 class EducationAmenities(models.AbstractModel):
     _name = 'report.education_core.report_exam_marksheet'
+    _description='report report exam marksheet'
 
     def get_objects(self, objects):
         obj = []

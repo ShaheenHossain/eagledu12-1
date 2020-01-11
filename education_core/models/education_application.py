@@ -5,6 +5,7 @@ from eagle.exceptions import ValidationError
 
 class GuardianStudentRelation(models.Model):
     _name='gurdian.student.relation'
+    _description='gurdian student relation'
     name=fields.Char(string='Name',required=True)
     gender=fields.Selection([('male',"Male"),
                              ('female','Female')])

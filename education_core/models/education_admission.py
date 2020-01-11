@@ -6,6 +6,7 @@ from datetime import datetime
 
 class admissionRegister(models.Model):
     _name='education.admission.register'
+    _description='this admission register'
     name=fields.Char('Register Name' ,compute='get_name')
     standard=fields.Many2one('education.class','Standard',required=True)
     academic_year=fields.Many2one('education.academic.year', "For the year" , required=True)

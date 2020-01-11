@@ -236,6 +236,7 @@ class EducationExamValuation(models.Model):
 
 class StudentsExamValuationLine(models.Model):
     _name = 'exam.valuation.line'
+    _description=' Exam Valuation line'
 
     student_id = fields.Many2one('education.student', string='Students')
     roll_no=fields.Integer('roll no',related='student_id.roll_no')

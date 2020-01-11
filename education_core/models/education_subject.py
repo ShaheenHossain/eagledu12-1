@@ -6,6 +6,7 @@ from eagle.exceptions import ValidationError
 
 class EducationSubject(models.Model):
     _name = 'education.subject'
+    _description=' education subject'
 
     name = fields.Char(string='Name', required=True, help="Name of the Subject")
     # is_language = fields.Boolean(string="Language", help="Tick if this subject is a language")
@@ -50,6 +51,7 @@ class EducationMotherTongue(models.Model):
 
 class EducationSyllabus(models.Model):
     _name = 'education.syllabus'
+    _description='education syllabus'
     _rec_name = 'display'
     name = fields.Char('Name')
     display=fields.Char('Display',help="This is printed on the marksheet as Subject")

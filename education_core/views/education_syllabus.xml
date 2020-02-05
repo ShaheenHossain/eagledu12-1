@@ -16,6 +16,7 @@
         </field>
     </record>
 
+<!--
     <record id="view_education_syllabus_form" model="ir.ui.view">
         <field name="name">education.syllabus.form</field>
         <field name="model">education.syllabus</field>
@@ -35,7 +36,9 @@
                                 <field name="selection_type"/>
                                 <field name="evaluation_type"/>
                                 <field name="description"/>
+
                                 &lt;!&ndash;<field name="total_hours"/>&ndash;&gt;
+
                             </group>
                             <group>
                                 <field name="name" attrs="{'invisible': ['|',('academic_year', '=', False),('class_id', '=',False)]}" />
@@ -62,7 +65,7 @@
                         </group>
                     </group>
                 </sheet>
-<!--
+&lt;!&ndash;
                 <group>
                     <field name="compulsory_for">
                         <tree>
@@ -70,10 +73,11 @@
                         </tree>
                     </field>
                 </group>
--->
+&ndash;&gt;
             </form>
         </field>
     </record>
+-->
 
 
      <record id="view_education_syllabus_search" model="ir.ui.view">

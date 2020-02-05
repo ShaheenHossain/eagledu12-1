@@ -22,7 +22,6 @@ access_education_medium,access.education.medium,model_education_medium,,1,1,1,1
 access_education_admission_register,access.education.admission_register,model_education_admission_register,,1,1,1,1
 access_education_class,access.education.class,model_education_class,,1,1,1,1
 access_education_academic_year,access.education.academic.year,model_education_academic_year,,1,1,1,1
-access_education_academic_month,access.education.academic.month,model_education_academic_month,,1,1,1,1
 access_education_month,access.education.month,model_education_month,,1,1,1,1
 access_gurdian_student_relation,access.gurdian.student_relation,model_gurdian_student_relation,,1,1,1,1
 access_education_rooms,access.education.rooms,model_education_rooms,,1,1,1,1

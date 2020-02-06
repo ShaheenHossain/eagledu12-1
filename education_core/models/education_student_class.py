@@ -3,7 +3,7 @@
 
 from eagle import fields, models, api, _
 from eagle.exceptions import ValidationError
-from datetime import date, datetime
+from datetime import datetime
 
 class EducationStudentClass(models.Model):
     _name = 'education.student.class'
@@ -11,7 +11,6 @@ class EducationStudentClass(models.Model):
     _inherit = ['mail.thread']
     # _rec_name = 'class_assign_name'
     name = fields.Char('Class Assign Register', compute='get_class_assign_name')
-    assign_date=fields.Date(default=fields.Date.today)
     keep_roll_no=fields.Boolean("keep Roll No")
     class_id = fields.Many2one('education.class', string='Class')
     student_list = fields.One2many('education.student.list', 'connect_id', string="Students")
@@ -20,10 +19,13 @@ class EducationStudentClass(models.Model):
     state = fields.Selection([('draft', 'Draft'), ('done', 'Done')],
                              string='State', required=True, default='draft', track_visibility='onchange')
 
+    assign_date = fields.Datetime(string='Asigned Date', default=datetime.today())
+
     @api.multi
     def get_class_assign_name(self):
         for rec in self:
-            rec.name=rec.admitted_class.name + '(assigned on '+ rec.assign_date +')'
+            rec.name=rec.admitted_class.name #+ '(assigned on '+ rec.assign_date +')'
+
     @api.multi
     def assign_class(self):
         max_roll = self.env['education.class.history'].search([('class_id','=',self.admitted_class.id)], order='roll_no desc', limit=1)

@@ -20,7 +20,7 @@ class StudentApplication(models.Model):
     _order = 'id desc'
 
     name = fields.Char(string='Name', required=True, help="Enter First name of Student")
-    name_b = fields.Char("নামের প্রথম অংশ",required=False)
+    name_b = fields.Char("নাম ", required=False)
     already_student=fields.Boolean("Allready Admitted?")
     ############
     #these are for import data
@@ -33,8 +33,7 @@ class StudentApplication(models.Model):
     import_id=fields.Many2one('education.import.previous.student')
 
     ###########
-    student_category=fields.Selection([('I',"Internal"),
-                                       ('E', "External")],'Category')
+    student_category=fields.Selection([('I',"Internal"), ('E', "External")],'Category')
     prev_school = fields.Many2one('education.institute', string='Previous Institution',
                                   help="Enter the name of previous institution")
     image = fields.Binary(string='Image', help="Provide the image of the Student")
@@ -101,7 +100,7 @@ class StudentApplication(models.Model):
     religion_id = fields.Many2one('religion.religion', string="Religion", help="My Religion is ")
     caste_id = fields.Many2one('religion.caste', string="Caste", help="My Caste is ")
     class_id = fields.Many2one('education.class.division', string="Class")
-    active = fields.Boolean(string='Active', default=False)
+    active = fields.Boolean(string='Active', default=True)
     document_count = fields.Integer(compute='_document_count', string='# Documents')
     verified_by = fields.Many2one('res.users', string='Verified by', help="The Document is verified by")
     reject_reason = fields.Many2one('application.reject.reason', string='Reject Reason',
@@ -115,7 +114,7 @@ class StudentApplication(models.Model):
                                    help="Your Blood Group is ")
     state = fields.Selection([('draft', 'Draft'), ('verification', 'Verify'),
                               ('approve', 'Approve'), ('reject', 'Reject'), ('done', 'Done')],
-                             string='State', required=False, default='draft', track_visibility='onchange')
+                             string='State', required=True, default='draft', track_visibility='onchange')
 
     _sql_constraints = [
         ('unique_student_id', 'unique(student_id)', 'Student Id must be unique'),

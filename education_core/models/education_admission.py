@@ -13,8 +13,10 @@ class admissionRegister(models.Model):
     start_time = fields.Datetime(string='Application Starts on',default=lambda self: fields.datetime.now())
     end_time = fields.Datetime(string='Application ends on',default=lambda self: fields.datetime.now())
     active=fields.Boolean('Is active', default='True')
+
     @api.onchange('standard','academic_year')
     def get_name(self):
         for rec in self:
             if rec.standard and rec.academic_year:
                 rec.name=rec.standard.name +'-'+rec.academic_year.name+' '+'Admission'
+

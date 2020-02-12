@@ -21,10 +21,11 @@ class EducationStudentClass(models.Model):
 
     assign_date = fields.Datetime(string='Asigned Date', default=datetime.today())
 
-    @api.multi
+    @api.multi #for admitted class name after save button click
     def get_class_assign_name(self):
         for rec in self:
-            rec.name=rec.admitted_class.name #+ '(assigned on '+ rec.assign_date +')'
+            rec.name = str(rec.admitted_class.name) + '(Assigned on ' + str(rec.assign_date) +')'
+            #rec.name=rec.admitted_class.name # not working in eagle 12   + '(assigned on '+ rec.assign_date +')'
 
     @api.multi
     def assign_class(self):

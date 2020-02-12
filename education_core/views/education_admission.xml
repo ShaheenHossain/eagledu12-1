@@ -251,7 +251,9 @@
         <field name="model">education.application</field>
         <field name="arch" type="xml">
             <search string="Search Application">
-                <!--<field name="admission_class"/>-->
+<!--
+                <field name="admission_class"/>
+-->
                 <field name="application_no"/>
 <!--
                 <field name="medium"/>
@@ -263,8 +265,9 @@
                 <filter string="Done" name="active" domain="[('state','=','done')]"/>
                 <filter string="Rejected" name="rejected" domain="[('state','=','reject')]"/>
                 <group expand='0' string='Group by...'>
-                    <!--<filter string='Admission To' icon="fa-user" domain="[]" context="{'group_by' : 'admission_class'}"/>-->
-<!--                <filter string='Academic Year' icon="fa-user" domain="[]" context="{'group_by' : 'academic_year_id'}"/>
+
+<!--                <filter string='Admission To' icon="fa-user" domain="[]" context="{'group_by' : 'admission_class'}"/>
+                    <filter string='Academic Year' icon="fa-user" domain="[]" context="{'group_by' : 'academic_year_id'}"/>
                     <filter string='Gender' icon="fa-genderless" domain="[]" context="{'group_by' : 'gender'}"/>
                     <filter string='Medium' icon="fa-medium" domain="[]" context="{'group_by' : 'medium'}"/>
                     <filter string='Religion' icon="fa-pencil-square-o" domain="[]" context="{'group_by' : 'religion_id'}"/>

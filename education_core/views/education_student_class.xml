@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eagle>
 
-    <record id="view_education_student_class_tree" model="ir.ui.view">
+    <record id="view_education_assign_class_tree" model="ir.ui.view">
         <field name="name">education.student.class.tree</field>
         <field name="model">education.student.class</field>
         <field name="arch" type="xml">
@@ -12,7 +12,8 @@
         </field>
     </record>
 
-    <record id="view_education_student_class_form" model="ir.ui.view">
+
+    <record id="view_education_assign_class_form" model="ir.ui.view">
         <field name="name">education.student.class.form</field>
         <field name="model">education.student.class</field>
         <field name="arch" type="xml">
@@ -21,7 +22,7 @@
                     <button name="get_student_list" type="object"
                             string="Get Students" groups="base.group_user"
                             help="Click to get student list" states="draft"/>
-                    <!--<button name="%(education_core.application_create_student)d" string="Assign Class"-->
+<!--                    <button name="%(education_core.application_create_student)d" string="Assign Class"-->
                     <button name='assign_class' string="Assign Class"
                                 type="object" class="oe_highlight"
                                 help="Click to assign class for selected students"
@@ -36,7 +37,6 @@
                             <field name="keep_roll_no"/>
                             <field name="admitted_class" attrs="{'readonly': [('state', '=', 'done')] , 'invisible': [('class_id', '=', False)]}"  domain="[('class_id','=',class_id)]"/>
                             <field name="assigned_by" attrs="{'invisible': [('state', '!=', 'done')]}"/>
-                            <!--<field name="admitted_class" attrs="{'invisible': [('admitted_class', '=', False)]}"/>-->
                         </group>
                         <group>
                         </group>
@@ -58,8 +58,9 @@
             </form>
         </field>
     </record>
+-->
 
-    <record id="action_student_class" model="ir.actions.act_window">
+    <record id="action_assign_class" model="ir.actions.act_window">
         <field name="name">Assign Class</field>
         <field name="res_model">education.student.class</field>
         <field name="type">ir.actions.act_window</field>
@@ -72,7 +73,7 @@
         </field>
     </record>
 
-    <menuitem id="menu_education_student_class" name="Assign Class" sequence="25"
-              parent="menu_education_admission" action="action_student_class"/>
+    <menuitem id="menu_education_assign_class" name="Assign Class" sequence="25"
+              parent="menu_education_admission" action="action_assign_class"/>
 
 </eagle>

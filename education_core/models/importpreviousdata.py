@@ -53,7 +53,7 @@ class importAllStudent(models.Model):
         for app in applications:
             if app.student_id:
                 # verify student
-                document_ids = self.env['education.documents'].search([('application_ref', '=', app.id)])
+                #document_ids = self.env['education.documents'].search([('application_ref', '=', app.id)])
                 # if not document_ids:
                 #     raise ValidationError(_('No Documents provided'))
                 app.write({

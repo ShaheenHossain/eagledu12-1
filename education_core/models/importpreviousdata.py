@@ -19,7 +19,7 @@ class importAllStudent(models.Model):
     #             lst.append((group.id, group.name))
     #     return lst
     date=fields.Date(default=fields.Date.today)
-    import_qty=fields.Integer('No of Student to Import')
+    import_qty=fields.Integer('No. of Student to Import')
     register_id=fields.Many2one('education.admission.register',"Import student Of")
     level=fields.Integer(related='register_id.standard.id')
     import_group=fields.Char('From Group')

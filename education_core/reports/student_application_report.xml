@@ -19,52 +19,23 @@
                                             <table class="table table-condensed">
                                                 <tr><td></td><td> <span>In English</span></td><td> <span>বাংলায়</span></td></tr>
                                                 <tr>
-                                                    <td>
-                                                        <strong><span>Student's Name:</span></strong>
-                                                    </td>
-                                                    <td>
-                                                        <span t-field="o.name"/>
-                                                        <!--<span t-field="o.middle_name"/>-->
-                                                        <!--<span t-field="o.last_name"/>-->
-                                                    </td><td>
-                                                        <span t-field="o.name_b"/>
-                                                    </td>
+                                                    <td><strong><span>Student's Name:</span></strong></td>
+                                                    <td><span t-field="o.name"/></td>
+                                                    <td><span t-field="o.name_b"/></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <strong><span>Father's Name:</span></strong>
-                                                    </td>
-                                                    <td>
-                                                        <span t-if="o.father_name" t-field="o.name_b"/>
-                                                    </td>
-                                                    <td>
-                                                        <span t-if="o.father_name_b" t-field="o.name_b"/>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>
-                                                        <strong><span>Mother's Name:</span></strong>
-                                                    </td>
-                                                    <td>
-                                                        <span t-if="o.mother_name" t-field="o.mother_name"/>
-                                                    </td>
-                                                </tr>
-                                                 <tr>
-                                                    <td>
-                                                        <strong><span>মায়ের নাম:</span></strong>
-                                                    </td>
-                                                    <td>
-                                                        <span t-if="o.mother_name_b" t-field="o.mother_name_b"/>
-                                                    </td>
+                                                    <td><strong><span>Father's Name:</span></strong></td>
+                                                    <td><span t-if="o.father_name" t-field="o.father_name"/></td>
+                                                    <td><span t-if="o.father_name_b" t-field="o.father_name_b"/></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <strong><span>Guardian's Name:</span></strong>
-                                                    </td>
-                                                    <td>
-                                                        <span t-if="o.guardian_name" t-field="o.guardian_name"/>
-                                                    </td>
+                                                    <td><strong><span>Mother's Name:</span></strong></td>
+                                                    <td><span t-if="o.mother_name" t-field="o.mother_name"/></td>
+                                                     <td><span t-if="o.mother_name_b" t-field="o.mother_name_b"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong><span>Guardian's Name:</span></strong></td>
+                                                    <td><span t-if="o.guardian_name" t-field="o.guardian_name"/></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align:left; padding-left:10px;" class="col-xs-4">

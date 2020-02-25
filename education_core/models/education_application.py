@@ -125,12 +125,10 @@ class StudentApplication(models.Model):
         for rec in self:
             if rec.guardian_relation.name:
                 if  rec.guardian_relation.name=='Father':
-                    rec.guardian_NID=rec.father_NID
                     rec.guardian_mobile=rec.father_mobile
                     rec.guardian_car_no=rec.father_car_no
                     rec.guardian_name=rec.father_name
                 elif  rec.guardian_relation.name=='Mother':
-                    rec.guardian_NID = rec.mother_NID
                     rec.guardian_mobile = rec.mother_mobile
                     rec.guardian_car_no = rec.mother_car_no
                     rec.guardian_name = rec.mother_name
@@ -171,7 +169,6 @@ class StudentApplication(models.Model):
                 father =father_id.id
             else:
                 new_father_id=father_id.create({'name': rec.father_name,
-                                                'nid_no': rec.father_NID,
                                                 'mobile': rec.father_mobile,
                                                 'car_no': rec.father_car_no,
                                                 'name_b': rec.father_name_b,
@@ -183,7 +180,6 @@ class StudentApplication(models.Model):
                 mother = mother_id.id
             else:
                 new_mother_id = mother_id.create({'name': rec.mother_name,
-                                                  'nid_no': rec.mother_NID,
                                                   'gender': 'female',
                                                   'is_parent': True})
                 mother = new_mother_id.id
@@ -197,7 +193,6 @@ class StudentApplication(models.Model):
                     guardian = guardian_id.id
                 else:
                     new_guardian_id = guardian_id.create({'name': rec.guardian_name,
-                                                          'nid_no': rec.guardian_NID,
                                                           'gender': rec.guardian_relation.gender,
                                                           'is_parent': True})
                     guardian = new_guardian_id.id

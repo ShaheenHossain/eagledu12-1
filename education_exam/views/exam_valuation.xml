@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eagle>
     <data>
+
 <!--
         <record id="education_exam_valuation_form" model="ir.ui.view">
-            <field name="name">education_exam_valuation_form.form</field>
+            <field name="name">education.exam.valuation.form</field>
             <field name="model">education.exam.valuation</field>
             <field name="arch" type="xml">
                 <form>
@@ -17,6 +18,7 @@
                                 string="Set to Draft"/>
                         <field name="state" readonly="1" widget="statusbar" statusbar_visible="draft,completed"/>
                     </header>
+
                     <sheet>
                         <h1>
                             <field name="name" readonly="1"/>
@@ -27,18 +29,16 @@
                                        attrs="{'readonly': ['|', ('mark_sheet_created', '=', True), ('state', '!=', 'draft')]}" options='{"no_open": True, "no_create": True}'/>
                                 <field name="class_id"
                                        attrs="{'readonly': ['|', ('mark_sheet_created', '=', True), ('state', '!=', 'draft')]}" options='{"no_open": True, "no_create": True}'/>
-
                                 <field name="division_id"
                                        attrs="{'readonly': ['|', ('mark_sheet_created', '=', True), ('state', '!=', 'draft')]}" options='{"no_open": True, "no_create": True}'/>
-
                                 <field name="teachers_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="subject_id" widget="selection"
                                        attrs="{'invisible': [('division_id', '=', False)],'readonly': ['|', ('mark_sheet_created', '=', True), ('state', '!=', 'draft')]}"/>
-
                                 <field name="academic_year" invisible="1"/>
                                 <field name="mark_sheet_created" invisible="1"/>
                             </group>
+
                             <group col="3">
                                 <label string="Details" />
                                 <label string="Mark" />
@@ -64,6 +64,7 @@
                                     string="Create Mark Sheet" name="create_mark_sheet" type="object"
                                     class="oe_highlight"/>
                         </div>
+
                         <notebook attrs="{'invisible': [('mark_sheet_created', '=', False)]}">
                             <page string="Mark Sheet">
                                 <field name="valuation_line" attrs="{'readonly': [('state', '!=', 'draft')]}">
@@ -72,18 +73,18 @@
                                         <field name="roll_no" invisible="0" readonly="1"/>
                                         <field name="student_name" readonly="1"/>
                                         <field name="tut_mark" attrs="{'column_invisible': [('parent.tut_mark', '=', 0)]}"/>
-                                        &lt;!&ndash;<field name="tut_pr" attrs="{'column_invisible': [('parent.tut_mark', '=', 0)]}"/>&ndash;&gt;
+                                        <field name="tut_pr" attrs="{'column_invisible': [('parent.tut_mark', '=', 0)]}"/>
                                         <field name="subj_mark" attrs="{'column_invisible': [('parent.subj_mark', '=', 0)]}"/>
-                                        &lt;!&ndash;<field name="subj_pr" attrs="{'column_invisible': [('parent.subj_mark', '=', 0)]}"/>&ndash;&gt;
+                                        <field name="subj_pr" attrs="{'column_invisible': [('parent.subj_mark', '=', 0)]}"/>
                                         <field name="obj_mark"  attrs="{'column_invisible': [('parent.obj_mark', '=', 0)]}"/>
-                                        &lt;!&ndash;<field name="obj_pr"  attrs="{'column_invisible': [('parent.obj_mark', '=', 0)]}"/>&ndash;&gt;
+                                        <field name="obj_pr"  attrs="{'column_invisible': [('parent.obj_mark', '=', 0)]}"/>
                                         <field name="prac_mark" attrs="{'column_invisible': [('parent.prac_mark', '=', 0)]}"/>
-                                        &lt;!&ndash;<field name="prac_pr" attrs="{'column_invisible': [('parent.prac_mark', '=', 0)]}"/>&ndash;&gt;
+                                        <field name="prac_pr" attrs="{'column_invisible': [('parent.prac_mark', '=', 0)]}"/>
                                         <field name="mark_scored" />
-                                        &lt;!&ndash;<field name="pass_or_fail" widget="boolean_toggle"/>&ndash;&gt;
+                                        <field name="pass_or_fail" widget="boolean_toggle"/>
                                         <field name="valuation_id" invisible="1"/>
-                                        &lt;!&ndash;<field name="letter_grade" invisible="1"/>&ndash;&gt;
-                                        &lt;!&ndash;<field name="grade_point" invisible="1"/>&ndash;&gt;
+                                        <field name="letter_grade" invisible="1"/>
+                                        <field name="grade_point" invisible="1"/>
                                     </tree>
                                     <form>
                                         <sheet>
@@ -92,14 +93,14 @@
                                                 <field name="mark_scored"/>
                                                 <field name="pass_or_fail" widget="boolean_toggle"/>
                                                 <field name="valuation_id" invisible="1"/>
-                                                &lt;!&ndash;<field name="letter_grade"/>&ndash;&gt;
-                                                &lt;!&ndash;<field name="grade_point" />&ndash;&gt;
-                                            </group>
+                                                <field name="letter_grade"/>
+                                                <field name="grade_point" />                                            </group>
                                         </sheet>
                                     </form>
                                 </field>
                             </page>
                         </notebook>
+
                     </sheet>
                 </form>
             </field>
@@ -121,7 +122,8 @@
                 </tree>
             </field>
         </record>
-    <record id="examination_valuation_search" model="ir.ui.view">
+
+        <record id="examination_valuation_search" model="ir.ui.view">
             <field name="name">examination_valuation_search</field>
             <field name="model">education.exam.valuation</field>
             <field name="arch" type="xml">

@@ -16,14 +16,13 @@
         </field>
     </record>
 
-<!--
     <record id="view_education_syllabus_form" model="ir.ui.view">
         <field name="name">education.syllabus.form</field>
         <field name="model">education.syllabus</field>
         <field name="arch" type="xml">
             <form string="Syllabus">
                 <sheet>
-                        <group col="4">
+                        <group>
                             <group>
                                 <field name="academic_year" required="1"/>
                                 <field name="class_id" required="1"/>
@@ -37,35 +36,39 @@
                                 <field name="evaluation_type"/>
                                 <field name="description"/>
 
-                                &lt;!&ndash;<field name="total_hours"/>&ndash;&gt;
+                                <!--<field name="total_hours"/>-->
 
                             </group>
+
                             <group>
-                                <field name="name" attrs="{'invisible': ['|',('academic_year', '=', False),('class_id', '=',False)]}" />
+                                <field name="name"/>
+                                <!--attrs="{'invisible': ['|',('academic_year', '=', False),('class_id', '=',False)]}"-->
                                 <field name="code"/>
                                 <field name="display"/>
                             </group>
+
                         </group>
 
-                    <group col="4"  string="Mark Distribution">
-                        <group col="4">
-                            <label string="Exam Type"/>
-                            <label string="Max Mark"/>
-                            <label string="Pass Mark"/>
-                            <field name="tut_mark"/>
-                             <field name="tut_pass" nolabel='1'/>
-                            <field name="subj_mark"/>
-                            <field name="subj_pass" nolabel='1'/>
-                            <field name="obj_mark"/>
-                            <field name="obj_pass" nolabel='1'/>
-                            <field name="prac_mark"/>
-                            <field name="prac_pass" nolabel='1'/>
-                            <field name="total_mark"/>
-                            <field name="pass_mark" nolabel='1'/>
+                        <group string="Mark Distribution">
+                            <group col="4">
+                                    <label for="exam_type" string="Exam Type"/>
+                                    <label for="max_mark" string="Max Mark"/>
+                                    <label for="pass_mark" string="Pass Mark"/>
+                                    <field name="tut_mark"/>
+                                    <field name="tut_pass" nolabel='1'/>
+                                    <field name="subj_mark"/>
+                                    <field name="subj_pass" nolabel='1'/>
+                                    <field name="obj_mark"/>
+                                    <field name="obj_pass" nolabel='1'/>
+                                    <field name="prac_mark"/>
+                                    <field name="prac_pass" nolabel='1'/>
+                                    <field name="total_mark"/>
+                                    <field name="pass_mark" nolabel='1'/>
+                            </group>
                         </group>
-                    </group>
+
                 </sheet>
-&lt;!&ndash;
+<!--
                 <group>
                     <field name="compulsory_for">
                         <tree>
@@ -73,11 +76,10 @@
                         </tree>
                     </field>
                 </group>
-&ndash;&gt;
+-->
             </form>
         </field>
     </record>
--->
 
 
      <record id="view_education_syllabus_search" model="ir.ui.view">

@@ -2,7 +2,6 @@
 <eagle>
     <data>
 
-<!--
         <record id="education_exam_valuation_form" model="ir.ui.view">
             <field name="name">education.exam.valuation.form</field>
             <field name="model">education.exam.valuation</field>
@@ -40,10 +39,9 @@
                             </group>
 
                             <group col="3">
-                                <label string="Details" />
-                                <label string="Mark" />
-                                <label string="Pass Mark" />
-
+                                <label for = "details" string="Details" />
+                                <label for = "mark" string="Mark" />
+                                <label for = "pass_mark" string="Pass Mark" />
 
                                 <field name="tut_mark"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="tut_pass_mark" nolabel='1' attrs="{'readonly': [('state', '!=', 'draft')]}"/>
@@ -105,7 +103,6 @@
                 </form>
             </field>
         </record>
--->
 
         <record id="examination_valuation_tree" model="ir.ui.view">
             <field name="name">examination_valuation_tree.tree</field>
